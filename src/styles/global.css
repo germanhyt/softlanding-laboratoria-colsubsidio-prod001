@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --brand-yellow: #ffe521;
+    --brand-yellow-soft: #fade4b;
+    --brand-yellow-pale: #fbe653;
+    --brand-magenta: #ed72ef;
+    --brand-magenta-bright: #ee77f2;
+    --brand-magenta-soft: #e878ec;
+    --brand-magenta-deep: #b240a6;
+    --brand-dark: #0f191f;
+    --brand-dark-deeper: #050709;
+    --brand-dark-muted: #232323;
+    --brand-mint: #41e7aa;
+    --brand-mint-bright: #57f7aa;
+    --brand-white: #ffffff;
+    --brand-mist: #f6f6f6;
+    --brand-fog: #f7f6f6;
+    --brand-black: #000000;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  body {
+    @apply bg-brand-neutral-white font-sans text-brand-dark antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-magenta;
+  }
+}
+
+@layer components {
+  /* Swiper pagination — Identificación (yellow band): white inactive, dark active */
+  .identificacion-swiper .swiper-pagination-bullet {
+    @apply !m-0 h-2.5 w-2.5 rounded-full bg-brand-neutral-white opacity-100;
+  }
+
+  .identificacion-swiper .swiper-pagination-bullet-active {
+    @apply bg-brand-dark;
+  }
+
+  /* Swiper pagination — Beneficios (magenta): light grey inactive, dark active */
+  .beneficios-swiper .swiper-pagination-bullet {
+    @apply !m-0 h-2.5 w-2.5 rounded-full bg-brand-neutral-white/45 opacity-100;
+  }
+
+  .beneficios-swiper .swiper-pagination-bullet-active {
+    @apply bg-brand-dark;
+  }
+}
+
+@layer utilities {
+  .section-placeholder {
+    @apply border border-dashed border-brand-dark/15 bg-brand-neutral-mist/60 px-4 py-12 text-center text-sm text-brand-dark/60;
+  }
+}

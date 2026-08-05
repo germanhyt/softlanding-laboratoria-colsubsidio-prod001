@@ -1,0 +1,148 @@
+---
+import { hero, logos } from "@content/content";
+import PostularCta from "@components/islands/PostularCta";
+import MotionScope from "@components/islands/MotionScope";
+import MotionReveal from "@components/islands/MotionReveal";
+---
+
+<!--
+  SoT desktop: info/prototype/1_desktop_hero-banner.png
+  - Text block left, ~3-line H1, generous gaps H1 → body → CTA
+  - Strong black left-to-right vignette (not a flat wash)
+  - Partner lockup: Colsubsidio taller than Laboratoria + "/"
+  Mobile layout: full-bleed; Colsubsidio copy (ignore UTP stub in mobile PNG)
+  Motion: mount stagger on copy + fade partners (prefers-reduced-motion safe)
+-->
+<section
+  id={hero.id}
+  class="hero relative isolate min-h-[100svh] overflow-hidden bg-brand-dark md:min-h-[min(720px,calc(100vh-4.5rem))] lg:min-h-[min(780px,calc(100vh-4.5rem))]"
+  aria-labelledby="hero-heading"
+>
+  <MotionReveal client:load trigger="mount" variant="scale" className="absolute inset-0 block h-full w-full">
+    <picture class="absolute inset-0 block h-full w-full">
+      <source media="(min-width: 768px)" srcset={hero.image.src} />
+      <img
+        src={hero.imageMobile.src}
+        alt=""
+        class="h-full w-full object-cover object-[72%_center] md:object-[center_40%]"
+        aria-hidden="true"
+      />
+    </picture>
+  </MotionReveal>
+
+  {/* Mobile: top vignette */}
+  <div
+    class="absolute inset-0 bg-gradient-to-b from-black/88 via-black/50 to-black/35 md:hidden"
+    aria-hidden="true"
+  >
+  </div>
+
+  {/*
+    Desktop: sombreado negro fuerte a la izquierda (prototype),
+    opaco en el borde y fade hacia el centro-derecha — no un overlay uniforme.
+  */}
+  <div class="hero-shade-desktop absolute inset-0 hidden md:block" aria-hidden="true">
+  </div>
+
+  <div
+    class="container relative z-10 flex min-h-[100svh] flex-col justify-center pb-28 pt-24 md:min-h-[min(720px,calc(100vh-4.5rem))] md:pb-32 md:pt-16 lg:min-h-[min(780px,calc(100vh-4.5rem))] lg:pb-36 lg:pt-20"
+  >
+    <!--
+      Bloque de texto: ancho para ~3 líneas de H1 en desktop,
+      espacios verticales generosos como el prototype.
+    -->
+    <MotionScope
+      client:load
+      trigger="mount"
+      staggerDelay={0.12}
+      y={28}
+      className="max-w-[19.5rem] text-white xs:max-w-[22rem] sm:max-w-md md:max-w-[32rem] lg:max-w-[36rem] xl:max-w-[40rem]"
+    >
+      <h1
+        id="hero-heading"
+        data-motion-item
+        class="text-[1.7rem] font-bold leading-[1.2] tracking-[-0.01em] text-white xs:text-[1.9rem] sm:text-[2.15rem] md:text-[2.5rem] md:leading-[1.18] lg:text-[2.85rem] xl:text-[3.05rem] xl:leading-[1.15]"
+      >
+        {hero.headline}
+      </h1>
+      <p
+        data-motion-item
+        class="mt-5 max-w-[34rem] text-[0.9375rem] font-normal leading-[1.55] text-white sm:mt-6 sm:text-base md:mt-7 md:text-[1.05rem] md:leading-[1.55] lg:mt-8 lg:text-[1.125rem] lg:leading-[1.55]"
+      >
+        {hero.subcopy}
+      </p>
+      <div data-motion-item>
+        <PostularCta
+          client:idle
+          href={hero.cta.href}
+          label={hero.cta.label}
+          className="mt-8 inline-flex items-center rounded-full bg-brand-yellow px-9 py-3 text-[0.95rem] font-bold text-brand-neutral-black transition hover:bg-brand-yellow-soft sm:mt-9 sm:px-10 sm:py-3.5 sm:text-base md:mt-10"
+        />
+      </div>
+    </MotionScope>
+
+    <!--
+      Lockup partners (prototype): Colsubsidio ~1.6–1.8× la altura de Laboratoria,
+      alineados al baseline, con "/" blanco.
+    -->
+    <MotionReveal
+      client:load
+      trigger="mount"
+      variant="fade"
+      delay={0.45}
+      className="pointer-events-none absolute inset-x-0 bottom-0 z-10"
+    >
+      <div aria-label="Aliados del programa">
+        <div
+          class="container flex items-end gap-2.5 py-5 sm:gap-3 sm:py-6 md:gap-3.5 md:py-7 lg:py-8"
+        >
+          <img
+            src={logos.colsubsidio.src}
+            alt={logos.colsubsidio.alt}
+            class="pointer-events-auto h-8 w-auto object-contain object-left sm:h-9 md:h-10 lg:h-[2.75rem] xl:h-12"
+            loading="eager"
+          />
+          <span
+            class="mb-0.5 select-none text-lg font-light leading-none text-white/95 sm:text-xl md:mb-1 md:text-2xl"
+            aria-hidden="true">/</span
+          >
+          <img
+            src={logos.laboWhite.src}
+            alt={logos.laboWhite.alt}
+            class="pointer-events-auto mb-0.5 h-[0.95rem] w-auto object-contain object-left sm:h-[1.05rem] md:mb-1 md:h-[1.2rem] lg:h-[1.35rem] xl:h-[1.45rem]"
+            loading="eager"
+          />
+        </div>
+      </div>
+    </MotionReveal>
+  </div>
+</section>
+
+<style>
+  /* Sombreado negro izquierdo — calca el vignette del prototype desktop */
+  .hero-shade-desktop {
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.88) 0%,
+      rgba(0, 0, 0, 0.78) 18%,
+      rgba(0, 0, 0, 0.55) 36%,
+      rgba(0, 0, 0, 0.22) 52%,
+      rgba(0, 0, 0, 0.05) 68%,
+      rgba(0, 0, 0, 0) 78%
+    );
+  }
+
+  @media (min-width: 1280px) {
+    .hero-shade-desktop {
+      background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.9) 0%,
+        rgba(0, 0, 0, 0.8) 16%,
+        rgba(0, 0, 0, 0.58) 32%,
+        rgba(0, 0, 0, 0.28) 48%,
+        rgba(0, 0, 0, 0.08) 62%,
+        rgba(0, 0, 0, 0) 74%
+      );
+    }
+  }
+</style>

@@ -1,0 +1,111 @@
+---
+import { conocenos } from "@content/content";
+import MotionReveal from "@components/islands/MotionReveal";
+---
+
+<!--
+  SoT:
+  - Desktop: info/prototype/9_desktop_impulsando-desarrollo-profesional.png
+  - Mobile:  info/prototype/9_mobile_impulsando-desarrollo-profesional.png
+
+  Map always visible (not MotionReveal — opacity:0 hid the watermark).
+  Asset is low-alpha grey; rendered as a solid silhouette via CSS mask.
+-->
+<section
+  id={conocenos.id}
+  class="conocenos relative scroll-mt-24 overflow-hidden bg-brand-neutral-white"
+  aria-labelledby="conocenos-heading"
+>
+  <!-- LatAm map watermark — always painted, never opacity:0 -->
+  <div
+    class="conocenos-map pointer-events-none absolute inset-y-0 left-0 z-0 overflow-hidden"
+    aria-hidden="true"
+  >
+    <div class="conocenos-map__sil absolute inset-y-0 left-0 h-full w-full">
+    </div>
+  </div>
+
+  <div
+    class="container relative z-10 grid items-center gap-10 py-14 xs:py-16 md:py-20 lg:grid-cols-2 lg:gap-12 lg:py-24 xl:gap-16 xl:py-28"
+  >
+    <MotionReveal client:visible variant="left" className="relative z-10 max-w-xl">
+      <h2
+        id="conocenos-heading"
+        class="text-[1.65rem] font-bold leading-[1.15] tracking-tight text-brand-dark xs:text-[1.85rem] sm:text-[2.15rem] md:text-[2.35rem] lg:text-[2.5rem]"
+      >
+        {conocenos.headline}
+      </h2>
+      <p
+        class="mt-5 text-[0.9375rem] leading-[1.55] text-brand-dark sm:text-base md:text-[1.05rem] lg:text-lg lg:leading-[1.55]"
+      >
+        {conocenos.body}
+      </p>
+      <a
+        href={conocenos.cta.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-8 inline-flex items-center rounded-full bg-brand-yellow px-8 py-3 text-base font-bold text-brand-dark transition hover:bg-brand-yellow-soft"
+      >
+        {conocenos.cta.label}
+      </a>
+    </MotionReveal>
+
+    <div class="conocenos-art relative z-10 overflow-hidden">
+      <img
+        src={conocenos.image.src}
+        alt={conocenos.image.alt}
+        class="conocenos-art__img mx-auto block h-auto w-full max-w-md object-contain sm:max-w-lg lg:ml-auto lg:mr-0 lg:max-w-none lg:w-[115%]"
+        loading="lazy"
+        width="720"
+        height="640"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .conocenos-map {
+    width: min(48vw, 460px);
+  }
+
+  @media (min-width: 1024px) {
+    .conocenos-map {
+      width: min(42vw, 520px);
+    }
+  }
+
+  /*
+    PNG landmass is very low-alpha — paint a solid silhouette with mask
+    so it reads on white like the prototype watermark.
+  */
+  .conocenos-map__sil {
+    background-color: #cfcfcf;
+    -webkit-mask-image: url("/assets/conocenos/map-latam.png");
+    mask-image: url("/assets/conocenos/map-latam.png");
+    -webkit-mask-size: auto 110%;
+    mask-size: auto 110%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: left center;
+    mask-position: left center;
+    transform: translateX(-22%);
+    opacity: 0.65;
+  }
+
+  @media (min-width: 1024px) {
+    .conocenos-map__sil {
+      transform: translateX(-28%);
+      opacity: 0.55;
+    }
+
+    .conocenos-art__img {
+      transform: translateX(10%);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .conocenos-map__sil {
+      transform: translateX(-32%);
+    }
+  }
+</style>

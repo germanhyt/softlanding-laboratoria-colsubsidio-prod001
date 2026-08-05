@@ -1,0 +1,79 @@
+---
+import { identificacion } from "@content/content";
+import SectionSwiper from "@components/islands/SectionSwiper";
+import MotionReveal from "@components/islands/MotionReveal";
+import MotionScope from "@components/islands/MotionScope";
+---
+
+<!--
+  SoT:
+  - Desktop: info/prototype/3_desktop_activa-carrera.png
+    full yellow band, centered H2, 3 equal white cards (no crop)
+  - Mobile: info/prototype/2_3_mobile (bloque amarillo)
+    Swiper 1 card + peek + 3 dots
+  Motion: heading fade-up; desktop cards stagger
+-->
+<section
+  id={identificacion.id}
+  class="identificacion scroll-mt-24 overflow-x-hidden bg-brand-yellow py-14 xs:py-16 md:py-20 lg:py-24 xl:py-[6.5rem]"
+  aria-labelledby="identificacion-heading"
+>
+  <div class="container">
+    <MotionReveal client:visible>
+      <h2
+        id="identificacion-heading"
+        class="mx-auto max-w-[18rem] text-center text-[1.35rem] font-normal leading-[1.25] tracking-tight text-brand-dark xs:max-w-sm xs:text-[1.5rem] sm:max-w-xl sm:text-[1.75rem] md:max-w-3xl md:text-[2rem] lg:max-w-4xl lg:text-[2.35rem] xl:text-[2.5rem]"
+      >
+        {identificacion.headlineBefore}<strong class="font-bold"
+          >{identificacion.headlineAccent}</strong
+        >{identificacion.headlineAfter}
+      </h2>
+    </MotionReveal>
+
+    {/*
+      Desktop / tablet: 3 equal cards fully inside the container.
+      lg+ preferred for 3-col; md uses 3-col with tighter gaps so nothing clips.
+    */}
+    <MotionScope
+      client:visible
+      staggerDelay={0.1}
+      className="mt-10 hidden gap-4 md:mt-12 md:grid md:grid-cols-3 md:gap-4 lg:mt-14 lg:gap-6 xl:gap-7"
+    >
+      <ul class="contents">
+        {
+          identificacion.cards.map((card) => (
+            <li
+              data-motion-item
+              class="flex min-w-0 flex-col rounded-[1.25rem] bg-brand-neutral-white px-5 py-6 shadow-[0_2px_12px_rgba(15,25,31,0.06)] sm:rounded-[1.5rem] sm:px-6 sm:py-7 lg:rounded-[1.75rem] lg:px-7 lg:py-8"
+            >
+              <span class="mx-auto inline-flex w-fit rounded-full border border-brand-dark px-4 py-1 text-sm font-medium text-brand-dark">
+                {card.label}
+              </span>
+              <img
+                src={card.image.src}
+                alt={card.image.alt}
+                class="mx-auto mt-5 h-32 w-auto max-w-full object-contain sm:mt-6 sm:h-36 lg:mt-7 lg:h-44"
+                loading="lazy"
+                width="280"
+                height="180"
+              />
+              <p class="mt-5 text-left text-sm leading-[1.5] text-brand-dark sm:mt-6 sm:text-[0.95rem] lg:mt-7 lg:text-base">
+                {card.body}
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+    </MotionScope>
+
+    {/* Mobile: carousel — peek controlled, section clips overflow-x */}
+    <MotionReveal client:visible className="mt-9 md:hidden">
+      <SectionSwiper
+        client:visible
+        variant="identificacion"
+        cards={[...identificacion.cards]}
+        className="identificacion-swiper"
+      />
+    </MotionReveal>
+  </div>
+</section>

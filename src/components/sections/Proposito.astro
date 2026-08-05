@@ -1,0 +1,63 @@
+---
+import { proposito } from "@content/content";
+import MotionReveal from "@components/islands/MotionReveal";
+---
+
+<!--
+  SoT:
+  - Desktop: info/prototype/2_desktop_mercado-laboral.png
+    text left + photo right, H2 black then magenta on next line,
+    body with thin magenta left rule, image large radius, items-center
+  - Mobile: info/prototype/2_3_mobile_volver-al-mercado.png (bloque superior)
+    stack text → image; same copy Colsubsidio
+  Motion: text fades from left, image from right
+-->
+<section
+  id={proposito.id}
+  class="proposito scroll-mt-24 bg-brand-neutral-white py-14 xs:py-16 md:py-20 lg:py-24 xl:py-28"
+  aria-labelledby="proposito-heading"
+>
+  <div
+    class="container grid items-center gap-8 md:gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-16"
+  >
+    <!-- Text column (~5/12 desktop) -->
+    <MotionReveal client:visible variant="left" className="lg:col-span-5 xl:col-span-5">
+      <h2
+        id="proposito-heading"
+        class="text-[1.75rem] font-bold leading-[1.15] tracking-tight text-brand-dark xs:text-[1.9rem] sm:text-[2.15rem] md:text-[2.35rem] lg:text-[2.5rem] xl:text-[2.75rem]"
+      >
+        <span class="block">{proposito.headlineBefore}</span>
+        <span class="mt-0.5 block text-brand-magenta"
+          >{proposito.headlineAccent}</span
+        >
+      </h2>
+
+      <p
+        class="proposito-body mt-6 max-w-md border-l-2 border-brand-magenta pl-4 text-[0.9375rem] leading-[1.55] text-brand-dark sm:mt-7 sm:pl-5 sm:text-base md:mt-8 md:max-w-lg md:text-[1.05rem] md:leading-[1.55] lg:text-lg lg:leading-[1.55]"
+      >
+        {proposito.body}
+      </p>
+    </MotionReveal>
+
+    <!-- Image column (~7/12 desktop) -->
+    <MotionReveal client:visible variant="right" delay={0.1} className="lg:col-span-7 xl:col-span-7">
+      <img
+        src={proposito.image.src}
+        alt={proposito.image.alt}
+        class="aspect-[5/3] h-auto w-full rounded-[1.25rem] object-cover object-center shadow-sm sm:rounded-[1.5rem] md:aspect-[8/5] lg:rounded-[1.75rem]"
+        loading="lazy"
+        width="1320"
+        height="800"
+      />
+    </MotionReveal>
+  </div>
+</section>
+
+<style>
+  /* Magenta accent matches prototype pink rule (~2px) */
+  .proposito-body {
+    border-left-width: 2px;
+    border-left-style: solid;
+    border-left-color: #ed72ef;
+  }
+</style>

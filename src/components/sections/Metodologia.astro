@@ -1,0 +1,68 @@
+---
+import { metodologia } from "@content/content";
+import MotionReveal from "@components/islands/MotionReveal";
+import MotionScope from "@components/islands/MotionScope";
+---
+
+<!--
+  SoT:
+  - Desktop: info/prototype/6_desktop_aprender-haciendo.png
+  - Mobile:  info/prototype/6_mobile_aprenderas-haciendo.png
+  Motion: header fade-up; pillars stagger
+-->
+<section
+  id={metodologia.id}
+  class="metodologia scroll-mt-24 bg-brand-neutral-white py-14 xs:py-16 md:py-20 lg:py-24 xl:py-28"
+  aria-labelledby="metodologia-heading"
+>
+  <div class="container">
+    <MotionReveal
+      client:visible
+      className="grid gap-5 md:gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-end lg:gap-12 xl:gap-16"
+    >
+      <h2
+        id="metodologia-heading"
+        class="text-[1.65rem] font-bold leading-[1.15] tracking-tight text-brand-dark xs:text-[1.85rem] sm:text-[2.1rem] md:text-[2.35rem] lg:text-[2.5rem]"
+      >
+        <span class="block">{metodologia.headlineBefore}</span>
+        <span class="block text-brand-magenta">{metodologia.headlineAccent.trimStart()}</span>
+      </h2>
+      <p
+        class="border-l-2 border-brand-magenta pl-4 text-[0.9375rem] leading-[1.55] text-brand-dark sm:pl-5 sm:text-base md:text-[1.05rem] lg:text-lg lg:leading-[1.55]"
+      >
+        {metodologia.introBefore}<strong class="font-bold"
+          >{metodologia.introAccent}</strong
+        >{metodologia.introAfter}
+      </p>
+    </MotionReveal>
+
+    <MotionScope
+      client:visible
+      staggerDelay={0.1}
+      className="mt-10 grid gap-8 sm:mt-12 sm:grid-cols-2 lg:mt-14 lg:grid-cols-4 lg:gap-6 xl:gap-7"
+    >
+      <ul class="contents">
+        {
+          metodologia.pillars.map((pillar) => (
+            <li data-motion-item class="flex flex-col">
+              <img
+                src={pillar.image.src}
+                alt={pillar.image.alt}
+                class="aspect-[16/10] w-full rounded-[1.15rem] object-cover sm:rounded-[1.25rem]"
+                loading="lazy"
+                width="640"
+                height="400"
+              />
+              <span class="mt-4 inline-flex w-fit rounded-full border border-brand-dark px-4 py-1 text-sm font-medium text-brand-dark">
+                {pillar.label}
+              </span>
+              <p class="mt-3 text-sm leading-[1.5] text-brand-dark sm:text-[0.95rem]">
+                {pillar.body}
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+    </MotionScope>
+  </div>
+</section>

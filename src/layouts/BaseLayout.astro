@@ -1,0 +1,53 @@
+---
+import { seoConfig } from "@config/seoConfig";
+import { siteConfig } from "@config/site.config";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = seoConfig.title, description = seoConfig.description } =
+  Astro.props;
+---
+
+<!doctype html>
+<html lang={siteConfig.lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={seoConfig.robots} />
+    <meta name="theme-color" content={seoConfig.themeColor} />
+    <link rel="canonical" href={seoConfig.canonical} />
+
+    <meta property="og:title" content={seoConfig.openGraph.title} />
+    <meta property="og:description" content={seoConfig.openGraph.description} />
+    <meta property="og:url" content={seoConfig.openGraph.url} />
+    <meta property="og:type" content={seoConfig.openGraph.type} />
+    <meta property="og:locale" content={seoConfig.openGraph.locale} />
+    <meta property="og:site_name" content={seoConfig.openGraph.siteName} />
+    <meta property="og:image" content={seoConfig.openGraph.image} />
+    <meta property="og:image:alt" content={seoConfig.openGraph.imageAlt} />
+
+    <meta name="twitter:card" content={seoConfig.twitter.card} />
+    <meta name="twitter:title" content={seoConfig.twitter.title} />
+    <meta name="twitter:description" content={seoConfig.twitter.description} />
+    <meta name="twitter:image" content={seoConfig.twitter.image} />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <Header />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

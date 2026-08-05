@@ -1,0 +1,62 @@
+schema: spec-driven
+persistence: hybrid
+
+context: |
+  Project: Laboratoria Colsubsidio softlanding (greenfield).
+  Goal: static Astro landing to drive labor insertion.
+  Stack (planned): Astro 5 + React 19 islands + TypeScript, Tailwind (tailwind.config.ts), Framer Motion, React Icons, Swiper, SweetAlert2, pnpm.
+  Output: static site (astro.config output: "static").
+  Design: Figma file wxEnH7TSQ263B9DSTEYmy8 (desktop 933-13415, mobile 1163-1042); fallback info/prototype/; assets info/img/.
+  Links: Conócenos → https://laboratoria.la; Postular → pending; other nav → in-page sections.
+  SEO: config/seoConfig.ts, config/site.config.ts, robots, sitemap. Helpers: utils/helpers.ts.
+  Status: no package.json yet — scaffold from SDD.md only.
+
+strict_tdd: false
+
+testing:
+  runner: null
+  unit: false
+  integration: false
+  e2e: false
+  coverage: false
+  linter: null
+  typechecker: typescript (planned)
+  formatter: null
+  notes: |
+    Greenfield with no test runner installed. Strict TDD disabled until a runner
+    (e.g. Vitest / Playwright) is added. Prefer smoke build (`pnpm build`) and
+    visual checks against Figma/prototype after implementation begins.
+
+rules:
+  proposal:
+    - Scope to the single landing page and its sections; do not invent backend or CMS.
+    - Treat Postular URL as a known open decision until the client provides it.
+    - Include rollback as reverting the change branch / restoring prior static build.
+  specs:
+    - Use Given/When/Then for scenarios.
+    - Use RFC 2119 keywords (MUST, SHALL, SHOULD, MAY).
+    - Spec sections MUST align with Figma/prototype section order (hero through FAQ).
+    - Responsive behavior MUST cover desktop and mobile breakpoints from the brief.
+  design:
+    - Prefer Astro pages/sections with React islands only where interactivity requires it (carousel, motion, alerts).
+    - Document asset mapping from info/img/ and prototype fallback strategy.
+    - Record SEO config shape and production `site` URL once known.
+    - Note Tailwind major-version conflict in SDD.md (text says v4; package pin is ^3.4.18) and resolve in design.
+  tasks:
+    - Group by phase: scaffold → design tokens → sections → SEO → polish.
+    - Keep tasks completable in one session; forecast 400-line PR budget risk.
+    - Do not block the whole landing on the pending Postular URL (use placeholder).
+  apply:
+    tdd: false
+    test_command: ""
+    guidelines:
+      - Follow patterns from prior Laboratoria Astro landings when helpful.
+      - Use pnpm exclusively.
+      - Match Figma; on MCP/Figma failure, match info/prototype desktop+mobile images.
+  verify:
+    test_command: ""
+    build_command: "pnpm build"
+    coverage_threshold: 0
+  archive:
+    - Warn before merging destructive deltas.
+    - Preserve Figma node IDs and asset paths in archived design notes.

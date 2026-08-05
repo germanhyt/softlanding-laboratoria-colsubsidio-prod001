@@ -1,0 +1,147 @@
+---
+import { experiencia } from "@content/content";
+import PostularCta from "@components/islands/PostularCta";
+import MotionReveal from "@components/islands/MotionReveal";
+import MotionScope from "@components/islands/MotionScope";
+---
+
+<!--
+  SoT: info/prototype/5_desktop_experiencia_10_semanas.png
+  Right art: ONLY art-composite.png — always visible (not wrapped in MotionReveal;
+  opacity:0 from motion was hiding the asset before hydration).
+-->
+<section
+  id={experiencia.id}
+  class="experiencia relative scroll-mt-24 overflow-hidden bg-brand-yellow"
+  aria-labelledby="experiencia-heading"
+>
+  <!-- Desktop art: plain markup so it never stays at opacity 0 -->
+  <div
+    class="experiencia-art-desktop pointer-events-none absolute inset-y-0 right-0 z-[1] hidden overflow-hidden lg:block"
+    aria-hidden="true"
+  >
+    <img
+      src={experiencia.artComposite.src}
+      alt=""
+      class="experiencia-art-desktop__img absolute bottom-0 right-0 h-full w-auto max-w-none origin-bottom-right"
+      loading="lazy"
+      width="1007"
+      height="950"
+    />
+  </div>
+
+  <div class="container relative z-10 py-14 xs:py-16 md:py-20 lg:py-24 xl:py-28">
+    <div class="relative z-20 lg:max-w-[54%] xl:max-w-[52%]">
+      <MotionReveal client:visible className="max-w-3xl">
+        <h2
+          id="experiencia-heading"
+          class="text-[1.65rem] font-bold leading-[1.18] tracking-tight text-brand-dark xs:text-[1.85rem] sm:text-[2.1rem] md:text-[2.35rem] lg:text-[2.5rem]"
+        >
+          {experiencia.headline}
+        </h2>
+        <p
+          class="mt-4 text-[0.9375rem] leading-[1.55] text-brand-dark sm:mt-5 sm:text-base md:text-[1.05rem] lg:text-lg lg:leading-[1.55]"
+        >
+          {experiencia.introBefore}<strong class="font-bold"
+            >{experiencia.introAccent}</strong
+          >
+        </p>
+      </MotionReveal>
+
+      <MotionScope
+        client:visible
+        staggerDelay={0.12}
+        className="mt-9 grid gap-4 sm:mt-11 sm:gap-5 md:grid-cols-2 lg:mt-12"
+      >
+        {
+          experiencia.modules.map((mod) => (
+            <article
+              data-motion-item
+              class="rounded-[1.35rem] bg-brand-neutral-white p-5 shadow-[0_2px_14px_rgba(15,25,31,0.06)] sm:rounded-[1.5rem] sm:p-6 lg:p-7"
+            >
+              <span class="inline-flex rounded-full border border-brand-magenta px-3.5 py-1 text-xs font-semibold text-brand-magenta sm:text-sm">
+                {mod.badge}
+              </span>
+              <h3 class="mt-4 text-base font-bold leading-snug text-brand-dark sm:text-lg">
+                {mod.title}
+              </h3>
+              <ul class="mt-4 space-y-2.5">
+                {mod.items.map((item) => (
+                  <li class="flex gap-2 text-sm leading-[1.5] text-brand-dark sm:text-[0.95rem]">
+                    <span
+                      class="mt-0.5 shrink-0 font-bold text-brand-magenta"
+                      aria-hidden="true"
+                    >
+                      &gt;
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))
+        }
+      </MotionScope>
+
+      <MotionReveal client:visible delay={0.15}>
+        <p class="mt-5 text-sm text-brand-dark sm:text-[0.95rem]">
+          {experiencia.footnote}
+        </p>
+        <div class="mt-6 flex justify-center md:justify-start">
+          <PostularCta
+            client:idle
+            href={experiencia.cta.href}
+            label={experiencia.cta.label}
+            className="inline-flex items-center rounded-full bg-brand-neutral-black px-9 py-3 text-base font-bold text-brand-neutral-white transition hover:bg-brand-dark-muted"
+          />
+        </div>
+      </MotionReveal>
+    </div>
+
+    <!-- Mobile art: always visible -->
+    <div
+      class="experiencia-art-mobile relative z-10 mt-10 overflow-hidden lg:hidden"
+    >
+      <img
+        src={experiencia.artComposite.src}
+        alt={experiencia.artComposite.alt}
+        class="experiencia-art-mobile__img mx-auto block h-auto w-[120%] max-w-none origin-bottom-right object-contain object-bottom"
+        loading="lazy"
+        width="1007"
+        height="950"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .experiencia-art-desktop {
+    width: min(50vw, 620px);
+  }
+
+  @media (min-width: 1280px) {
+    .experiencia-art-desktop {
+      width: min(48vw, 680px);
+    }
+  }
+
+  .experiencia-art-desktop__img {
+    transform: translateX(14%);
+  }
+
+  @media (min-width: 1280px) {
+    .experiencia-art-desktop__img {
+      transform: translateX(16%);
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .experiencia-art-desktop__img {
+      transform: translateX(18%);
+    }
+  }
+
+  .experiencia-art-mobile__img {
+    transform: translateX(8%);
+  }
+</style>

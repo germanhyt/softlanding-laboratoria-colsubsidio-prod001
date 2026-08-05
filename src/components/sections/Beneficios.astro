@@ -1,0 +1,95 @@
+---
+import { beneficios } from "@content/content";
+import SectionSwiper from "@components/islands/SectionSwiper";
+import MotionReveal from "@components/islands/MotionReveal";
+import MotionScope from "@components/islands/MotionScope";
+---
+
+<!--
+  SoT:
+  - Desktop: info/prototype/4_desktop_preparate-para-mercado-laboral.png
+    H2 left + intro right; magenta rounded panel; 3×2 white cards
+  - Mobile: info/prototype/4_mobile_preparate-para-volver-mercado-laboral.png
+    stacked H2 + intro; magenta panel; Swiper 1 card + 6 dots
+  Motion: header fade-up; panel scale-in; desktop cards stagger
+-->
+<section
+  id={beneficios.id}
+  class="beneficios scroll-mt-24 bg-brand-neutral-white py-14 xs:py-16 md:py-20 lg:py-24 xl:py-28"
+  aria-labelledby="beneficios-heading"
+>
+  <div class="container">
+    <MotionReveal
+      client:visible
+      className="grid gap-5 md:gap-6 lg:grid-cols-2 lg:items-end lg:gap-12 xl:gap-16"
+    >
+      <h2
+        id="beneficios-heading"
+        class="max-w-xl text-[1.65rem] font-normal leading-[1.2] tracking-tight text-brand-dark xs:text-[1.85rem] sm:text-[2.1rem] md:text-[2.35rem] lg:text-[2.5rem] xl:text-[2.65rem]"
+      >
+        {beneficios.headlineBefore}<strong class="font-bold"
+          >{beneficios.headlineAccent}</strong
+        >
+      </h2>
+      <p
+        class="max-w-xl text-[0.9375rem] leading-[1.55] text-brand-dark sm:text-base md:text-[1.05rem] lg:text-lg lg:leading-[1.55]"
+      >
+        {beneficios.introBefore}<strong class="font-bold text-brand-dark"
+          >{beneficios.introAccent}</strong
+        >{beneficios.introAfter}
+      </p>
+    </MotionReveal>
+
+    <MotionReveal
+      client:visible
+      variant="scale"
+      delay={0.08}
+      className="mt-9 rounded-[1.5rem] bg-brand-magenta p-4 xs:p-5 sm:mt-11 sm:rounded-[1.75rem] sm:p-6 md:mt-12 lg:mt-14 lg:rounded-[2rem] lg:p-8 xl:p-10"
+    >
+      {/* Desktop / tablet landscape: 3×2 */}
+      <MotionScope
+        client:visible
+        staggerDelay={0.07}
+        y={20}
+        className="hidden md:block"
+      >
+        <ul class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+          {
+            beneficios.cards.map((card) => (
+              <li
+                data-motion-item
+                class="rounded-[1.15rem] bg-brand-neutral-white p-5 sm:rounded-2xl sm:p-6 lg:p-7"
+              >
+                <img
+                  src={card.image.src}
+                  alt=""
+                  class="h-11 w-11 object-contain sm:h-12 sm:w-12"
+                  aria-hidden="true"
+                  loading="lazy"
+                  width="48"
+                  height="48"
+                />
+                <h3 class="mt-4 text-base font-bold leading-snug text-brand-dark sm:text-[1.05rem] lg:text-lg">
+                  {card.title}
+                </h3>
+                <p class="mt-2 text-sm leading-[1.5] text-brand-dark/85 sm:text-[0.95rem]">
+                  {card.body}
+                </p>
+              </li>
+            ))
+          }
+        </ul>
+      </MotionScope>
+
+      {/* Mobile: Swiper + 6 dots */}
+      <div class="md:hidden">
+        <SectionSwiper
+          client:visible
+          variant="beneficios"
+          cards={[...beneficios.cards]}
+          className="beneficios-swiper"
+        />
+      </div>
+    </MotionReveal>
+  </div>
+</section>

@@ -1,0 +1,36 @@
+---
+import { closingCta } from "@content/content";
+import MotionReveal from "@components/islands/MotionReveal";
+---
+
+<section
+  id={closingCta.id}
+  class="scroll-mt-24 bg-brand-neutral-white py-10 md:py-14"
+  aria-labelledby="closing-cta-heading"
+>
+  <div class="container">
+    <MotionReveal
+      client:visible
+      variant="scale"
+      className="rounded-[2rem] bg-brand-yellow px-6 py-12 text-center sm:px-10 sm:py-14 lg:px-16"
+    >
+      <h2
+        id="closing-cta-heading"
+        class="mx-auto max-w-3xl text-2xl font-bold leading-tight tracking-tight text-brand-dark sm:text-3xl lg:text-4xl"
+      >
+        {closingCta.headline}
+      </h2>
+      <p
+        class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-brand-dark/90 sm:text-lg"
+      >
+        {closingCta.body}
+      </p>
+      <a
+        href={closingCta.cta.href}
+        class="mt-8 inline-flex items-center rounded-full bg-brand-neutral-black px-8 py-3 text-base font-semibold text-brand-neutral-white transition hover:bg-brand-dark-muted"
+      >
+        {closingCta.cta.label}
+      </a>
+    </MotionReveal>
+  </div>
+</section>

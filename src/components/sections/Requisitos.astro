@@ -1,0 +1,89 @@
+---
+import { requisitos } from "@content/content";
+import PostularCta from "@components/islands/PostularCta";
+import MotionReveal from "@components/islands/MotionReveal";
+import MotionScope from "@components/islands/MotionScope";
+---
+
+<!--
+  SoT:
+  - Desktop: info/prototype/7_desktop_este-programa-para-ti.png
+  - Mobile:  info/prototype/7_mobile_este-programa-para-ti.png
+    (ignore stale H2 in some mobile PNGs — use desktop Colsubsidio copy)
+
+  Visual: precomposed Group 1000004522.png (magenta + yellow diagonal + portrait)
+  → single asset scales cleanly for responsive.
+  Motion: copy from left; list stagger; portrait from right
+-->
+<section
+  id={requisitos.id}
+  class="requisitos scroll-mt-24 bg-brand-neutral-mist py-14 xs:py-16 md:py-20 lg:py-24 xl:py-28"
+  aria-labelledby="requisitos-heading"
+>
+  <div
+    class="container grid items-center gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16"
+  >
+    <div class="order-1">
+      <MotionReveal client:visible variant="left">
+        <h2
+          id="requisitos-heading"
+          class="text-[1.75rem] font-bold leading-[1.15] tracking-tight text-brand-dark xs:text-[1.9rem] sm:text-[2.15rem] md:text-[2.35rem] lg:text-[2.5rem]"
+        >
+          {requisitos.headline}
+        </h2>
+        <p class="mt-4 text-base text-brand-dark sm:text-lg">
+          {requisitos.intro}
+        </p>
+      </MotionReveal>
+
+      <MotionScope client:visible staggerDelay={0.08} y={16} className="mt-6">
+        <ul class="space-y-3">
+          {
+            requisitos.items.map((item) => (
+              <li
+                data-motion-item
+                class="flex items-start gap-3 rounded-2xl bg-brand-neutral-white px-4 py-3.5 shadow-[0_2px_10px_rgba(15,25,31,0.05)] sm:px-5"
+              >
+                <span
+                  class="mt-0.5 shrink-0 font-bold text-brand-magenta"
+                  aria-hidden="true"
+                >
+                  &gt;
+                </span>
+                <span class="text-sm leading-[1.5] text-brand-dark sm:text-base">
+                  {item}
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </MotionScope>
+
+      <MotionReveal client:visible delay={0.2} className="mt-8 flex justify-center md:justify-start">
+        <PostularCta
+          client:idle
+          href={requisitos.cta.href}
+          label={requisitos.cta.label}
+          className="inline-flex items-center rounded-full bg-brand-yellow px-9 py-3 text-base font-bold text-brand-neutral-black transition hover:bg-brand-yellow-soft"
+        />
+      </MotionReveal>
+    </div>
+
+    <!-- Precomposed layered portrait (magenta/yellow + subject) -->
+    <MotionReveal
+      client:visible
+      variant="right"
+      delay={0.1}
+      className="order-2 mx-auto w-full max-w-md lg:max-w-none"
+    >
+      <img
+        src={requisitos.image.src}
+        alt={requisitos.image.alt}
+        class="h-auto w-full rounded-[1.5rem] object-cover object-center sm:rounded-[1.75rem] lg:rounded-[2rem]"
+        loading="lazy"
+        width="908"
+        height="854"
+      />
+    </MotionReveal>
+  </div>
+</section>

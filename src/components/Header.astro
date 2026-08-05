@@ -1,0 +1,126 @@
+---
+import { siteConfig } from "@config/site.config";
+import { logos, navLinks } from "@content/content";
+import MobileNav from "@components/islands/MobileNav";
+---
+
+<!--
+  Desktop (prototype 1_desktop): white bar, black logo, dark links, yellow Postular.
+  Mobile (prototype 1_mobile): transparent over hero, white logo + white hamburger;
+  solid white + black branding after scroll for readability on light sections.
+-->
+<header
+  id="site-header"
+  class="fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,border-color] duration-300 lg:border-b lg:border-brand-dark/10 lg:bg-brand-neutral-white/95 lg:backdrop-blur"
+  data-header
+>
+  <div
+    class="container flex h-14 items-center justify-between gap-4 sm:h-16 lg:h-[4.5rem]"
+  >
+    <a
+      href="#inicio"
+      class="inline-flex shrink-0 items-center"
+      aria-label="Laboratoria — inicio"
+    >
+      <img
+        src={logos.laboWhite.src}
+        alt=""
+        class="header-logo-white h-5 w-auto sm:h-6 lg:hidden"
+        width="140"
+        height="17"
+        aria-hidden="true"
+      />
+      <img
+        src={logos.laboBlack.src}
+        alt={logos.laboBlack.alt}
+        class="header-logo-black h-5 w-auto sm:h-6 lg:h-7"
+        width="160"
+        height="20"
+      />
+    </a>
+
+    <nav
+      class="hidden items-center gap-6 lg:flex xl:gap-8"
+      aria-label="Principal"
+    >
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="text-sm font-medium text-brand-dark transition hover:text-brand-dark/70"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <a
+        href={siteConfig.conocenosUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-sm font-medium text-brand-dark transition hover:text-brand-dark/70"
+      >
+        Conócenos
+      </a>
+      <a
+        href={siteConfig.postularUrl}
+        class="inline-flex items-center rounded-full bg-brand-yellow px-5 py-2.5 text-sm font-bold text-brand-neutral-black transition hover:bg-brand-yellow-soft"
+      >
+        Postular
+      </a>
+    </nav>
+
+    <MobileNav
+      client:load
+      links={[...navLinks]}
+      conocenosUrl={siteConfig.conocenosUrl}
+      postularUrl={siteConfig.postularUrl}
+      logoSrc={logos.laboBlack.src}
+      logoAlt={logos.laboBlack.alt}
+    />
+  </div>
+</header>
+
+<style>
+  /* Mobile default: over hero — white logo, hide black */
+  #site-header .header-logo-black {
+    display: none;
+  }
+  #site-header .header-logo-white {
+    display: block;
+  }
+
+  /* Scrolled / solid mobile header */
+  #site-header.is-solid {
+    background-color: rgb(255 255 255 / 0.97);
+    border-bottom: 1px solid rgb(15 25 31 / 0.1);
+    box-shadow: 0 1px 0 rgb(15 25 31 / 0.04);
+  }
+  #site-header.is-solid .header-logo-white {
+    display: none;
+  }
+  #site-header.is-solid .header-logo-black {
+    display: block;
+  }
+
+  @media (min-width: 1024px) {
+    #site-header .header-logo-white {
+      display: none !important;
+    }
+    #site-header .header-logo-black {
+      display: block !important;
+    }
+  }
+</style>
+
+<script>
+  const header = document.getElementById("site-header");
+  if (header) {
+    const update = () => {
+      const solid = window.scrollY > 24 || window.innerWidth >= 1024;
+      header.classList.toggle("is-solid", solid);
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+  }
+</script>
