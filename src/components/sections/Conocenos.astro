@@ -17,40 +17,42 @@ import MotionReveal from "@components/islands/MotionReveal";
   aria-labelledby="conocenos-heading"
 >
   <!-- LatAm map watermark — always painted, never opacity:0 -->
-  <div
-    class="conocenos-map pointer-events-none absolute inset-y-0 left-0 z-0 overflow-hidden"
-    aria-hidden="true"
-  >
-    <div class="conocenos-map__sil absolute inset-y-0 left-0 h-full w-full">
-    </div>
+  <div class="conocenos-map" aria-hidden="true">
+    <div class="conocenos-map__sil"></div>
   </div>
 
   <div
     class="container relative z-10 grid items-center gap-10 py-14 xs:py-16 md:py-20 lg:grid-cols-2 lg:gap-12 lg:py-24 xl:gap-16 xl:py-28"
   >
-    <MotionReveal client:visible variant="up" className="relative z-10 max-w-xl">
-      <h2
-        id="conocenos-heading"
-        class="text-[1.65rem] font-bold leading-[1.15] tracking-tight text-brand-dark xs:text-[1.85rem] sm:text-[2.15rem] md:text-[2.35rem] lg:text-[2.5rem]"
-      >
-        {conocenos.headline}
-      </h2>
-      <p
-        class="mt-5 text-[0.9375rem] leading-[1.55] text-brand-dark sm:text-base md:text-[1.05rem] lg:text-lg lg:leading-[1.55]"
-      >
-        {conocenos.body}
-      </p>
-      <a
-        href={conocenos.cta.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="mt-8 inline-flex items-center rounded-full bg-brand-yellow px-8 py-3 text-base font-bold text-brand-dark transition hover:bg-brand-yellow-soft"
-      >
-        {conocenos.cta.label}
-      </a>
-    </MotionReveal>
+    <div class="relative z-10 max-w-xl">
+      <MotionReveal client:load variant="left">
+        <h2
+          id="conocenos-heading"
+          class="text-[1.65rem] font-bold leading-[1.15] tracking-tight text-brand-dark xs:text-[1.85rem] sm:text-[2.15rem] md:text-[2.35rem] lg:text-[2.5rem]"
+        >
+          {conocenos.headline}
+        </h2>
+      </MotionReveal>
+      <MotionReveal client:load variant="left" delay={0.06}>
+        <p
+          class="mt-5 text-[0.9375rem] leading-[1.55] text-brand-dark sm:text-base md:text-[1.05rem] lg:text-lg lg:leading-[1.55]"
+        >
+          {conocenos.body}
+        </p>
+      </MotionReveal>
+      <MotionReveal client:load variant="up" delay={0.1} className="mt-8">
+        <a
+          href={conocenos.cta.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center rounded-full bg-brand-yellow px-8 py-3 text-base font-bold text-brand-dark transition hover:bg-brand-yellow-soft"
+        >
+          {conocenos.cta.label}
+        </a>
+      </MotionReveal>
+    </div>
 
-    <div class="conocenos-art relative z-10 overflow-hidden">
+    <MotionReveal client:load variant="right" delay={0.1} className="conocenos-art relative z-10 overflow-hidden">
       <img
         src={conocenos.image.src}
         alt={conocenos.image.alt}
@@ -59,43 +61,71 @@ import MotionReveal from "@components/islands/MotionReveal";
         width="720"
         height="640"
       />
-    </div>
+    </MotionReveal>
   </div>
 </section>
 
 <style>
   .conocenos-map {
-    width: min(48vw, 460px);
+    pointer-events: none;
+    position: absolute;
+    inset: 0 auto 0 0;
+    z-index: 0;
+    /* Wide enough so the silhouette is never clipped at xl/2xl */
+    width: min(72vw, 560px);
+    overflow: visible;
+  }
+
+  @media (min-width: 768px) {
+    .conocenos-map {
+      width: min(62vw, 680px);
+    }
   }
 
   @media (min-width: 1024px) {
     .conocenos-map {
-      width: min(42vw, 520px);
+      width: min(58vw, 820px);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .conocenos-map {
+      width: min(52vw, 920px);
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .conocenos-map {
+      width: min(48vw, 980px);
     }
   }
 
   /*
-    PNG landmass is very low-alpha — paint a solid silhouette with mask
-    so it reads on white like the prototype watermark.
+    PNG landmass is very low-alpha — paint a solid silhouette with mask.
+    Position via mask-position (not translateX) so wide viewports never clip.
   */
   .conocenos-map__sil {
-    background-color: #cfcfcf;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #b8b8b8;
     -webkit-mask-image: url("/assets/conocenos/map-latam.png");
     mask-image: url("/assets/conocenos/map-latam.png");
-    -webkit-mask-size: auto 110%;
-    mask-size: auto 110%;
+    -webkit-mask-size: contain;
+    mask-size: contain;
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
-    -webkit-mask-position: left center;
-    mask-position: left center;
-    transform: translateX(-22%);
-    opacity: 0.65;
+    -webkit-mask-position: 8% center;
+    mask-position: 8% center;
+    opacity: 0.78;
   }
 
   @media (min-width: 1024px) {
     .conocenos-map__sil {
-      transform: translateX(-28%);
-      opacity: 0.55;
+      -webkit-mask-position: 12% center;
+      mask-position: 12% center;
+      opacity: 0.72;
     }
 
     .conocenos-art__img {
@@ -105,7 +135,8 @@ import MotionReveal from "@components/islands/MotionReveal";
 
   @media (min-width: 1280px) {
     .conocenos-map__sil {
-      transform: translateX(-32%);
+      -webkit-mask-position: 16% center;
+      mask-position: 16% center;
     }
   }
 </style>

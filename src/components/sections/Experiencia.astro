@@ -33,15 +33,17 @@ import MotionScope from "@components/islands/MotionScope";
   <div class="relative z-10 pt-14 xs:pt-16 md:pt-20 lg:pt-24 xl:pt-28">
     <div class="container">
       <div class="relative z-20 lg:max-w-[54%] xl:max-w-[52%]">
-      <MotionReveal client:visible variant="fade" className="max-w-3xl">
+      <MotionReveal client:load variant="up" className="max-w-3xl">
         <h2
           id="experiencia-heading"
           class="text-[1.65rem] font-bold leading-[1.18] tracking-tight text-brand-dark xs:text-[1.85rem] sm:text-[2.1rem] md:text-[2.35rem] lg:text-[2.5rem]"
         >
           {experiencia.headline}
         </h2>
+      </MotionReveal>
+      <MotionReveal client:load variant="up" delay={0.06} className="mt-4 max-w-3xl">
         <p
-          class="mt-4 text-[0.9375rem] leading-[1.55] text-brand-dark sm:mt-5 sm:text-base md:text-[1.05rem] lg:text-lg lg:leading-[1.55]"
+          class="text-[0.9375rem] leading-[1.55] text-brand-dark sm:text-base md:text-[1.05rem] lg:text-lg lg:leading-[1.55]"
         >
           {experiencia.introBefore}<strong class="font-bold"
             >{experiencia.introAccent}</strong
@@ -50,9 +52,9 @@ import MotionScope from "@components/islands/MotionScope";
       </MotionReveal>
 
       <MotionScope
-        client:visible
-        staggerDelay={0.055}
-        y={10}
+        client:load
+        variant="up"
+        staggerDelay={0.07}
         className="mt-9 grid gap-4 sm:mt-11 sm:gap-5 md:grid-cols-2 lg:mt-12"
       >
         {
@@ -85,18 +87,18 @@ import MotionScope from "@components/islands/MotionScope";
         }
       </MotionScope>
 
-      <MotionReveal client:visible variant="fade" delay={0.06}>
+      <MotionReveal client:load variant="fade" delay={0.04}>
         <p class="mt-5 text-sm text-brand-dark sm:text-[0.95rem]">
           {experiencia.footnote}
         </p>
-        <div class="mt-6 flex justify-center md:justify-start">
-          <PostularCta
-            client:idle
-            href={experiencia.cta.href}
-            label={experiencia.cta.label}
-            className="inline-flex items-center rounded-full bg-brand-neutral-black px-9 py-3 text-base font-bold text-brand-neutral-white transition hover:bg-brand-dark-muted"
-          />
-        </div>
+      </MotionReveal>
+      <MotionReveal client:load variant="up" delay={0.08} className="mt-6 flex justify-center md:justify-start">
+        <PostularCta
+          client:idle
+          href={experiencia.cta.href}
+          label={experiencia.cta.label}
+          className="inline-flex items-center rounded-full bg-brand-neutral-black px-9 py-3 text-base font-bold text-brand-neutral-white transition hover:bg-brand-dark-muted"
+        />
       </MotionReveal>
       </div>
     </div>

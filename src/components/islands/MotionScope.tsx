@@ -1,39 +1,70 @@
 import {
   animate,
   inView,
-  stagger,
   useReducedMotion,
 } from "framer-motion";
 import { useEffect, useRef, type ReactNode } from "react";
-import { easeOutExpo } from "../../lib/motion";
+import {
+  type MotionVariantName,
+  hiddenStyleForVariant,
+  itemEntrance,
+  itemInViewOptions,
+  motionTravel,
+  subtleHiddenForVariant,
+} from "../../lib/motion";
 
 type Props = {
   children: ReactNode;
   className?: string;
-  /** CSS selector for staggered children (default: [data-motion-item]). */
   itemSelector?: string;
+  /** Entrance direction for each `[data-motion-item]`. Default: up (bottom→top). */
+  variant?: MotionVariantName;
   staggerDelay?: number;
   y?: number;
-  /** `view` = when scope enters viewport; `mount` = on hydrate (hero). */
   trigger?: "view" | "mount";
 };
 
-function isInViewport(el: HTMLElement): boolean {
-  const rect = el.getBoundingClientRect();
-  const vh = window.innerHeight || 0;
-  return rect.top < vh * 0.9 && rect.bottom > vh * 0.08;
+function isBelowFold(el: HTMLElement): boolean {
+  return el.getBoundingClientRect().top >= window.innerHeight * 0.98;
+}
+
+function applyHiddenStyle(
+  el: HTMLElement,
+  variant: MotionVariantName,
+  y: number,
+  subtle = false,
+) {
+  if (subtle) {
+    const s = subtleHiddenForVariant(variant, y);
+    el.style.opacity = String(s.opacity);
+    if (s.x !== undefined) {
+      el.style.transform = `translate3d(${s.x}px, 0, 0)`;
+    } else if (s.y !== undefined) {
+      el.style.transform = `translate3d(0, ${s.y}px, 0)`;
+    } else if (s.scale !== undefined) {
+      el.style.transform = `scale(${s.scale})`;
+    } else {
+      el.style.transform = "none";
+    }
+  } else {
+    const hidden = hiddenStyleForVariant(variant, y);
+    el.style.opacity = hidden.opacity;
+    el.style.transform = hidden.transform;
+  }
+  el.style.willChange = "opacity, transform";
 }
 
 /**
- * Staggers Astro-rendered children marked with `data-motion-item`.
- * Items stay visible until the entrance plays — no flash on off-screen blocks.
+ * Per-item scroll entrances for `[data-motion-item]` children.
+ * Each item animates on its own inView — no group blink.
  */
 export default function MotionScope({
   children,
   className,
   itemSelector = "[data-motion-item]",
-  staggerDelay = 0.055,
-  y = 10,
+  variant = "up",
+  staggerDelay = 0.07,
+  y = motionTravel.y,
   trigger = "view",
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
@@ -48,51 +79,57 @@ export default function MotionScope({
     );
     if (items.length === 0) return;
 
-    let played = false;
+    const played = new WeakSet<HTMLElement>();
+    const cleanups: (() => void)[] = [];
 
-    const play = (mode: "full" | "subtle" = "full") => {
-      if (played) return;
-      played = true;
+    const reveal = (el: HTMLElement, order: number, forceFull = false) => {
+      if (played.has(el)) return;
+      played.add(el);
 
-      const travel = mode === "subtle" ? Math.min(y, 6) : y;
-      const fromOpacity = mode === "subtle" ? 0.94 : 0;
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const alreadyVisible =
+        !forceFull && rect.top < vh * 0.88 && rect.bottom > 0;
 
-      items.forEach((el) => {
-        el.style.opacity = String(fromOpacity);
-        el.style.transform = `translate3d(0, ${travel}px, 0)`;
-        el.style.willChange = "opacity, transform";
-      });
+      applyHiddenStyle(el, variant, y, alreadyVisible);
 
       requestAnimationFrame(() => {
         void animate(
-          items,
-          { opacity: 1, y: 0 },
+          el,
+          { opacity: 1, y: 0, x: 0, scale: 1 },
           {
-            delay: stagger(staggerDelay),
-            duration: mode === "subtle" ? 0.4 : 0.44,
-            ease: easeOutExpo,
+            ...itemEntrance,
+            delay: order * staggerDelay,
           },
         ).then(() => {
-          items.forEach((el) => {
-            el.style.willChange = "";
-            el.style.transform = "";
-            el.style.opacity = "";
-          });
+          el.style.opacity = "";
+          el.style.transform = "";
+          el.style.willChange = "";
         });
       });
     };
 
     if (trigger === "mount") {
-      play(isInViewport(root) ? "subtle" : "full");
+      items.forEach((el, index) => reveal(el, index, true));
       return;
     }
 
-    return inView(
-      root,
-      () => play("full"),
-      { amount: 0.22, once: true, margin: "0px 0px -5% 0px" },
-    );
-  }, [reduceMotion, itemSelector, staggerDelay, y, trigger]);
+    items.forEach((el, index) => {
+      if (isBelowFold(el)) {
+        applyHiddenStyle(el, variant, y, false);
+      }
+
+      cleanups.push(
+        inView(
+          el,
+          () => reveal(el, index),
+          itemInViewOptions,
+        ),
+      );
+    });
+
+    return () => cleanups.forEach((stop) => stop());
+  }, [reduceMotion, itemSelector, variant, staggerDelay, y, trigger]);
 
   return (
     <div ref={ref} className={className}>

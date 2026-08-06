@@ -10,7 +10,7 @@ import MotionReveal from "@components/islands/MotionReveal";
     body with thin magenta left rule, image large radius, items-center
   - Mobile: info/prototype/2_3_mobile_volver-al-mercado.png (bloque superior)
     stack text → image; same copy Colsubsidio
-  Motion: copy fade-up; image soft fade
+  Motion: copy from left; image from right
 -->
 <section
   id={proposito.id}
@@ -21,26 +21,29 @@ import MotionReveal from "@components/islands/MotionReveal";
     class="container grid items-center gap-8 md:gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-16"
   >
     <!-- Text column (~5/12 desktop) -->
-    <MotionReveal client:visible variant="up" className="lg:col-span-5 xl:col-span-5">
-      <h2
-        id="proposito-heading"
-        class="text-[1.75rem] font-bold leading-[1.15] tracking-tight text-brand-dark xs:text-[1.9rem] sm:text-[2.15rem] md:text-[2.35rem] lg:text-[2.5rem] xl:text-[2.75rem]"
-      >
-        <span class="block">{proposito.headlineBefore}</span>
-        <span class="mt-0.5 block text-brand-magenta"
-          >{proposito.headlineAccent}</span
+    <div class="lg:col-span-5 xl:col-span-5">
+      <MotionReveal client:load variant="left">
+        <h2
+          id="proposito-heading"
+          class="text-[1.75rem] font-bold leading-[1.15] tracking-tight text-brand-dark xs:text-[1.9rem] sm:text-[2.15rem] md:text-[2.35rem] lg:text-[2.5rem] xl:text-[2.75rem]"
         >
-      </h2>
-
-      <p
-        class="proposito-body mt-6 max-w-md border-l-2 border-brand-magenta pl-4 text-[0.9375rem] leading-[1.55] text-brand-dark sm:mt-7 sm:pl-5 sm:text-base md:mt-8 md:max-w-lg md:text-[1.05rem] md:leading-[1.55] lg:text-lg lg:leading-[1.55]"
-      >
-        {proposito.body}
-      </p>
-    </MotionReveal>
+          <span class="block">{proposito.headlineBefore}</span>
+          <span class="mt-0.5 block text-brand-magenta"
+            >{proposito.headlineAccent}</span
+          >
+        </h2>
+      </MotionReveal>
+      <MotionReveal client:load variant="left" delay={0.06}>
+        <p
+          class="proposito-body mt-6 max-w-md border-l-2 border-brand-magenta pl-4 text-[0.9375rem] leading-[1.55] text-brand-dark sm:mt-7 sm:pl-5 sm:text-base md:mt-8 md:max-w-lg md:text-[1.05rem] md:leading-[1.55] lg:text-lg lg:leading-[1.55]"
+        >
+          {proposito.body}
+        </p>
+      </MotionReveal>
+    </div>
 
     <!-- Image column (~7/12 desktop) -->
-    <MotionReveal client:visible variant="fade" delay={0.05} className="lg:col-span-7 xl:col-span-7">
+    <MotionReveal client:load variant="right" delay={0.1} className="lg:col-span-7 xl:col-span-7">
       <img
         src={proposito.image.src}
         alt={proposito.image.alt}

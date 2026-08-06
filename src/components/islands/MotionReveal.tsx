@@ -1,30 +1,34 @@
 import { useReducedMotion, motion } from "framer-motion";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import {
   type MotionVariantName,
-  subtleInViewByVariant,
-  subtleTransition,
+  easeOutExpo,
+  hiddenStyleForVariant,
+  subtleHiddenForVariant,
   variantMap,
-  viewportOnce,
+  viewportScroll,
 } from "../../lib/motion";
 
 type Props = {
   children: ReactNode;
   className?: string;
   delay?: number;
-  /** Entrance direction / style. Default: up */
   variant?: MotionVariantName;
-  /** `view` = whileInView; `mount` = animate on load (hero). */
+  /** `view` = reveal on scroll; `mount` = animate once on load (hero). */
   trigger?: "view" | "mount";
 };
 
+function isBelowFold(el: HTMLElement): boolean {
+  return el.getBoundingClientRect().top >= window.innerHeight * 0.92;
+}
+
+/** Soft entrance when the block is already on screen at hydrate. */
+function subtleFromVariant(variant: MotionVariantName) {
+  return subtleHiddenForVariant(variant);
+}
+
 /**
- * Entrance reveal for key section blocks.
- *
- * First paint / SSR stays VISIBLE. After hydrate we arm motion:
- * - already in viewport → subtle nudge (no opacity:0 flash)
- * - below fold → full reveal on scroll
- * Honors prefers-reduced-motion.
+ * Single-block scroll entrance — one heading, paragraph, image, or CTA per instance.
  */
 export default function MotionReveal({
   children,
@@ -35,32 +39,28 @@ export default function MotionReveal({
 }: Props) {
   const reduceMotion = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
-  const [armed, setArmed] = useState(false);
-  const [inViewOnArm, setInViewOnArm] = useState(false);
+  const [mode, setMode] = useState<"pending" | "scroll" | "enter">("pending");
   const variants = variantMap[variant];
-  const subtle = subtleInViewByVariant[variant];
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const el = ref.current;
-    if (el) {
-      const rect = el.getBoundingClientRect();
-      const vh = window.innerHeight || 0;
-      setInViewOnArm(rect.top < vh * 0.88 && rect.bottom > vh * 0.1);
+    if (!el || trigger !== "view") {
+      setMode("enter");
+      return;
     }
-    const id = requestAnimationFrame(() => setArmed(true));
-    return () => cancelAnimationFrame(id);
-  }, []);
+    if (isBelowFold(el)) {
+      const hidden = hiddenStyleForVariant(variant);
+      el.style.opacity = hidden.opacity;
+      el.style.transform = hidden.transform;
+      el.style.willChange = "opacity, transform";
+      setMode("scroll");
+    } else {
+      setMode("enter");
+    }
+  }, [trigger, variant]);
 
   if (reduceMotion) {
     return <div className={className}>{children}</div>;
-  }
-
-  if (!armed) {
-    return (
-      <div ref={ref} className={className}>
-        {children}
-      </div>
-    );
   }
 
   if (trigger === "mount") {
@@ -77,13 +77,24 @@ export default function MotionReveal({
     );
   }
 
-  if (inViewOnArm) {
+  if (mode === "pending") {
+    return (
+      <div ref={ref} className={className}>
+        {children}
+      </div>
+    );
+  }
+
+  if (mode === "enter") {
+    const from = subtleFromVariant(variant);
+    const to = { opacity: 1, y: 0, x: 0, scale: 1 };
     return (
       <motion.div
+        ref={ref}
         className={className}
-        initial={subtle.initial}
-        animate={subtle.animate}
-        transition={{ ...subtleTransition, delay }}
+        initial={from}
+        animate={to}
+        transition={{ duration: 0.52, ease: easeOutExpo, delay }}
       >
         {children}
       </motion.div>
@@ -92,12 +103,20 @@ export default function MotionReveal({
 
   return (
     <motion.div
+      ref={ref}
       className={className}
       variants={variants}
       initial="hidden"
       whileInView="visible"
-      viewport={viewportOnce}
+      viewport={viewportScroll}
       transition={{ delay }}
+      onAnimationComplete={() => {
+        const el = ref.current;
+        if (!el) return;
+        el.style.opacity = "";
+        el.style.transform = "";
+        el.style.willChange = "";
+      }}
     >
       {children}
     </motion.div>

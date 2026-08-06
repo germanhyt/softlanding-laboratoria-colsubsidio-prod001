@@ -8,7 +8,7 @@ import MotionScope from "@components/islands/MotionScope";
   SoT:
   - Desktop: info/prototype/6_desktop_aprender-haciendo.png
   - Mobile:  info/prototype/6_mobile_aprenderas-haciendo.png
-  Motion: header fade-up; pillars stagger
+  Motion: header left + right; pillars rise (up)
 -->
 <section
   id={metodologia.id}
@@ -16,31 +16,33 @@ import MotionScope from "@components/islands/MotionScope";
   aria-labelledby="metodologia-heading"
 >
   <div class="container">
-    <MotionReveal
-      client:visible
-      variant="fade"
-      className="grid gap-5 md:gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-end lg:gap-12 xl:gap-16"
+    <div
+      class="grid gap-5 md:gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-end lg:gap-12 xl:gap-16"
     >
-      <h2
-        id="metodologia-heading"
-        class="text-[1.65rem] font-bold leading-[1.15] tracking-tight text-brand-dark xs:text-[1.85rem] sm:text-[2.1rem] md:text-[2.35rem] lg:text-[2.5rem]"
-      >
-        <span class="block">{metodologia.headlineBefore}</span>
-        <span class="block text-brand-magenta">{metodologia.headlineAccent.trimStart()}</span>
-      </h2>
-      <p
-        class="border-l-2 border-brand-magenta pl-4 text-[0.9375rem] leading-[1.55] text-brand-dark sm:pl-5 sm:text-base md:text-[1.05rem] lg:text-lg lg:leading-[1.55]"
-      >
-        {metodologia.introBefore}<strong class="font-bold"
-          >{metodologia.introAccent}</strong
-        >{metodologia.introAfter}
-      </p>
-    </MotionReveal>
+      <MotionReveal client:load variant="left">
+        <h2
+          id="metodologia-heading"
+          class="text-[1.65rem] font-bold leading-[1.15] tracking-tight text-brand-dark xs:text-[1.85rem] sm:text-[2.1rem] md:text-[2.35rem] lg:text-[2.5rem]"
+        >
+          <span class="block">{metodologia.headlineBefore}</span>
+          <span class="block text-brand-magenta">{metodologia.headlineAccent.trimStart()}</span>
+        </h2>
+      </MotionReveal>
+      <MotionReveal client:load variant="right" delay={0.06}>
+        <p
+          class="border-l-2 border-brand-magenta pl-4 text-[0.9375rem] leading-[1.55] text-brand-dark sm:pl-5 sm:text-base md:text-[1.05rem] lg:text-lg lg:leading-[1.55]"
+        >
+          {metodologia.introBefore}<strong class="font-bold"
+            >{metodologia.introAccent}</strong
+          >{metodologia.introAfter}
+        </p>
+      </MotionReveal>
+    </div>
 
     <MotionScope
-      client:visible
-      staggerDelay={0.055}
-      y={10}
+      client:load
+      variant="up"
+      staggerDelay={0.07}
       className="mt-10 grid gap-8 sm:mt-12 sm:grid-cols-2 lg:mt-14 lg:grid-cols-4 lg:gap-6 xl:gap-7"
     >
       <ul class="contents">

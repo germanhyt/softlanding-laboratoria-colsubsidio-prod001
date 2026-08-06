@@ -13,7 +13,7 @@ import MotionScope from "@components/islands/MotionScope";
 
   Visual: precomposed Group 1000004522.png (magenta + yellow diagonal + portrait)
   → single asset scales cleanly for responsive.
-  Motion: copy fade-up; list stagger; portrait soft fade
+  Motion: copy from left; list rise; portrait from right
 -->
 <section
   id={requisitos.id}
@@ -24,19 +24,21 @@ import MotionScope from "@components/islands/MotionScope";
     class="container grid items-center gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16"
   >
     <div class="order-1">
-      <MotionReveal client:visible variant="up">
+      <MotionReveal client:load variant="left">
         <h2
           id="requisitos-heading"
           class="text-[1.75rem] font-bold leading-[1.15] tracking-tight text-brand-dark xs:text-[1.9rem] sm:text-[2.15rem] md:text-[2.35rem] lg:text-[2.5rem]"
         >
           {requisitos.headline}
         </h2>
+      </MotionReveal>
+      <MotionReveal client:load variant="left" delay={0.06}>
         <p class="mt-4 text-base text-brand-dark sm:text-lg">
           {requisitos.intro}
         </p>
       </MotionReveal>
 
-      <MotionScope client:visible staggerDelay={0.055} y={10} className="mt-6">
+      <MotionScope client:load variant="up" staggerDelay={0.07} className="mt-6">
         <ul class="space-y-3">
           {
             requisitos.items.map((item) => (
@@ -59,7 +61,7 @@ import MotionScope from "@components/islands/MotionScope";
         </ul>
       </MotionScope>
 
-      <MotionReveal client:visible variant="fade" delay={0.06} className="mt-8 flex justify-center md:justify-start">
+      <MotionReveal client:load variant="up" delay={0.08} className="mt-8 flex justify-center md:justify-start">
         <PostularCta
           client:idle
           href={requisitos.cta.href}
@@ -71,9 +73,9 @@ import MotionScope from "@components/islands/MotionScope";
 
     <!-- Precomposed layered portrait (magenta/yellow + subject) -->
     <MotionReveal
-      client:visible
-      variant="fade"
-      delay={0.05}
+      client:load
+      variant="right"
+      delay={0.08}
       className="order-2 mx-auto w-full max-w-md lg:max-w-none"
     >
       <img

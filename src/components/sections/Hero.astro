@@ -11,7 +11,7 @@ import MotionReveal from "@components/islands/MotionReveal";
   - Strong black left-to-right vignette (not a flat wash)
   - Partner lockup: Colsubsidio taller than Laboratoria + "/"
   Mobile layout: full-bleed; Colsubsidio copy (ignore UTP stub in mobile PNG)
-  Motion: mount stagger on copy + fade partners (prefers-reduced-motion safe)
+  Motion: copy stagger from left (mount); partner lockup rises up
 -->
 <section
   id={hero.id}
@@ -57,8 +57,8 @@ import MotionReveal from "@components/islands/MotionReveal";
     <MotionScope
       client:load
       trigger="mount"
-      staggerDelay={0.12}
-      y={28}
+      variant="left"
+      staggerDelay={0.08}
       className="mb-[10rem] md:mb-[0rem]  max-w-[19.5rem] text-white xs:max-w-[22rem] sm:max-w-md md:max-w-[32rem] lg:max-w-[48rem] xl:max-w-[52rem]"
     >
       <h1
@@ -91,8 +91,8 @@ import MotionReveal from "@components/islands/MotionReveal";
     <MotionReveal
       client:load
       trigger="mount"
-      variant="fade"
-      delay={0.45}
+      variant="up"
+      delay={0.28}
       className="pointer-events-none absolute inset-x-0 bottom-0 z-10"
     >
       <div aria-label="Aliados del programa">

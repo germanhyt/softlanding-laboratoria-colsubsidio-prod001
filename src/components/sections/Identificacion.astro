@@ -19,7 +19,7 @@ import MotionScope from "@components/islands/MotionScope";
   aria-labelledby="identificacion-heading"
 >
   <div class="container">
-    <MotionReveal client:visible variant="fade">
+    <MotionReveal client:load variant="up">
       <h2
         id="identificacion-heading"
         class="mx-auto max-w-[18rem] text-center text-[1.35rem] font-normal leading-[1.25] tracking-tight text-brand-dark xs:max-w-sm xs:text-[1.5rem] sm:max-w-xl sm:text-[1.75rem] md:max-w-3xl md:text-[2rem] lg:max-w-4xl lg:text-[2.35rem] xl:text-[2.5rem]"
@@ -35,9 +35,9 @@ import MotionScope from "@components/islands/MotionScope";
       lg+ preferred for 3-col; md uses 3-col with tighter gaps so nothing clips.
     */}
     <MotionScope
-      client:visible
-      staggerDelay={0.055}
-      y={10}
+      client:load
+      variant="up"
+      staggerDelay={0.07}
       className="mt-10 hidden gap-4 md:mt-12 md:grid md:grid-cols-3 md:gap-4 lg:mt-14 lg:gap-6 xl:gap-7"
     >
       <ul class="contents">
