@@ -18,30 +18,32 @@ import MotionReveal from "@components/islands/MotionReveal";
   class="hero relative isolate min-h-[100svh] overflow-hidden bg-brand-dark md:min-h-[min(720px,calc(100vh-4.5rem))] lg:min-h-[min(780px,calc(100vh-4.5rem))]"
   aria-labelledby="hero-heading"
 >
-  <MotionReveal client:load trigger="mount" variant="scale" className="absolute inset-0 block h-full w-full">
-    <picture class="absolute inset-0 block h-full w-full">
-      <source media="(min-width: 768px)" srcset={hero.image.src} />
-      <img
-        src={hero.imageMobile.src}
-        alt=""
-        class="h-full w-full object-cover object-[72%_center] md:object-[center_40%]"
-        aria-hidden="true"
-      />
-    </picture>
-  </MotionReveal>
+  <!-- Photo always visible — never MotionReveal (opacity:0 hid media before) -->
+  <picture class="absolute inset-0 z-0 block h-full w-full">
+    <source media="(min-width: 768px)" srcset={hero.image.src} />
+    <img
+      src={hero.imageMobile.src}
+      alt=""
+      class="h-full w-full object-cover object-[72%_center] md:object-[center_40%]"
+      aria-hidden="true"
+    />
+  </picture>
 
-  {/* Mobile: top vignette */}
-  <div
-    class="absolute inset-0 bg-gradient-to-b from-black/88 via-black/50 to-black/35 md:hidden"
-    aria-hidden="true"
-  >
+  <!--
+    Mobile: strong top→bottom black vignette (prototype 1_mobile).
+    Solid near the header/copy, then fades into the photo.
+  -->
+  <div class="hero-shade-mobile absolute inset-0 z-[1] md:hidden" aria-hidden="true">
   </div>
 
-  {/*
+  <!--
     Desktop: sombreado negro fuerte a la izquierda (prototype),
     opaco en el borde y fade hacia el centro-derecha — no un overlay uniforme.
-  */}
-  <div class="hero-shade-desktop absolute inset-0 hidden md:block" aria-hidden="true">
+  -->
+  <div
+    class="hero-shade-desktop absolute inset-0 z-[1] hidden md:block"
+    aria-hidden="true"
+  >
   </div>
 
   <div
@@ -56,7 +58,7 @@ import MotionReveal from "@components/islands/MotionReveal";
       trigger="mount"
       staggerDelay={0.12}
       y={28}
-      className="max-w-[19.5rem] text-white xs:max-w-[22rem] sm:max-w-md md:max-w-[32rem] lg:max-w-[48rem] xl:max-w-[52rem]"
+      className="mb-[4rem] lg:mb-[6rem]   max-w-[19.5rem] text-white xs:max-w-[22rem] sm:max-w-md md:max-w-[32rem] lg:max-w-[48rem] xl:max-w-[52rem]"
     >
       <h1
         id="hero-heading"
@@ -119,7 +121,21 @@ import MotionReveal from "@components/islands/MotionReveal";
 </section>
 
 <style>
-  /* Sombreado negro izquierdo — calca el vignette del prototype desktop */
+  /* Mobile: top black band → fade into photo (1_mobile prototype) */
+  .hero-shade-mobile {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.97) 0%,
+      rgba(0, 0, 0, 0.92) 18%,
+      rgba(0, 0, 0, 0.78) 36%,
+      rgba(0, 0, 0, 0.45) 52%,
+      rgba(0, 0, 0, 0.18) 68%,
+      rgba(0, 0, 0, 0.04) 82%,
+      transparent 100%
+    );
+  }
+
+  /* Desktop: left vignette */
   .hero-shade-desktop {
     background: linear-gradient(
       90deg,

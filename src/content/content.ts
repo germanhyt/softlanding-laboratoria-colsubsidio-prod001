@@ -41,7 +41,7 @@ export const hero = {
     alt: "Dos mujeres profesionales colaborando en un entorno de oficina moderno",
   },
   imageMobile: {
-    src: "/assets/hero/hero--mobile.webp",
+    src: "/assets/hero/hero--mobile.png",
     alt: "Dos mujeres profesionales colaborando en un entorno de oficina moderno",
   },
 } as const;
@@ -263,7 +263,7 @@ export const logistica = {
     src: "/assets/logistica/desktop.webp",
     alt: "Dos mujeres profesionales conversando en una oficina moderna",
   },
-  /** Mobile stacked portrait — public/assets/logistica/mobile.png */
+  /** Mobile stacked portrait (tall crop + top vignette in Logistica.astro). */
   imageMobile: {
     src: "/assets/logistica/mobile.png",
     alt: "Dos mujeres profesionales conversando en una oficina moderna",

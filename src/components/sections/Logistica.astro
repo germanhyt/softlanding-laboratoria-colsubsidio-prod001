@@ -13,8 +13,8 @@ const icons = {
 <!--
   SoT: info/prototype/8_desktop_que-necesitas-para-participar.png
   Desktop: photo FULL WIDTH behind content + strong left black→transparent gradient.
-  Mobile:  dark panel + stacked portrait (mobile.png), height capped.
-  Assets: desktop.webp / mobile.png — never wrap media in MotionReveal.
+  Mobile:  dark panel + stacked portrait (mobile.webp) + top vignette.
+  Assets: desktop.webp / mobile.webp — never wrap media in MotionReveal.
 -->
 <section
   id={logistica.id}
@@ -89,7 +89,7 @@ const icons = {
       </MotionScope>
     </div>
 
-    <!-- Mobile: portrait asset below cards (not full-bleed behind) -->
+    <!-- Mobile: portrait below cards + top black→transparent fade into the photo -->
     <div
       class="relative w-full overflow-hidden lg:hidden max-h-[420px] aspect-[11/14] sm:max-h-[460px]"
     >
@@ -98,9 +98,11 @@ const icons = {
         alt={logistica.imageMobile.alt}
         class="h-full w-full object-cover object-[center_35%]"
         loading="lazy"
-        width="440"
-        height="976"
+        width="1230"
+        height="4180"
       />
+      <div class="logistica-shade-mobile pointer-events-none absolute inset-0" aria-hidden="true">
+      </div>
     </div>
   </div>
 </section>
@@ -157,5 +159,17 @@ const icons = {
         transparent 80%
       );
     }
+  }
+
+  /* Mobile: blend dark panel → photo (top vignette on the image) */
+  .logistica-shade-mobile {
+    background: linear-gradient(
+      180deg,
+      #0f0f0f 0%,
+      rgba(15, 15, 15, 0.85) 18%,
+      rgba(15, 15, 15, 0.45) 42%,
+      rgba(15, 15, 15, 0.12) 68%,
+      transparent 100%
+    );
   }
 </style>

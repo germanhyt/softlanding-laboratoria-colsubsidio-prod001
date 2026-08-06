@@ -12,12 +12,12 @@ import MotionScope from "@components/islands/MotionScope";
 -->
 <section
   id={experiencia.id}
-  class="experiencia relative scroll-mt-24 overflow-hidden bg-brand-yellow"
+  class="experiencia relative scroll-mt-24 bg-brand-yellow"
   aria-labelledby="experiencia-heading"
 >
   <!-- Desktop art: plain markup so it never stays at opacity 0 -->
   <div
-    class="experiencia-art-desktop pointer-events-none absolute inset-y-0 right-0 z-[1] hidden  lg:block"
+    class="experiencia-art-desktop pointer-events-none absolute inset-y-0 right-0 z-[1] hidden lg:block"
     aria-hidden="true"
   >
     <img
@@ -30,8 +30,8 @@ import MotionScope from "@components/islands/MotionScope";
     />
   </div>
 
-  <div class="container relative z-10 py-14 xs:py-16 md:py-20 lg:py-24 xl:py-28">
-    <div class="relative z-20 lg:max-w-[54%] xl:max-w-[52%]">
+  <div class="relative z-10 pt-14 xs:pt-16 md:pt-20 lg:pt-24 xl:pt-28">
+    <div class="container relative z-20 lg:max-w-[54%] xl:max-w-[52%]">
       <MotionReveal client:visible className="max-w-3xl">
         <h2
           id="experiencia-heading"
@@ -105,7 +105,7 @@ import MotionScope from "@components/islands/MotionScope";
       <img
         src={experiencia.artComposite.src}
         alt={experiencia.artComposite.alt}
-        class="experiencia-art-mobile__img mx-auto block h-auto w-[120%] max-w-none origin-bottom-right object-contain object-bottom"
+        class="experiencia-art-mobile__img mx-auto block h-auto w-[90%] max-w-none origin-bottom-right object-contain object-bottom"
         loading="lazy"
         width="1007"
         height="950"
