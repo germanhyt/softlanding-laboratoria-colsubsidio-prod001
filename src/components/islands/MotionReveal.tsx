@@ -2,8 +2,10 @@ import { useReducedMotion, motion } from "framer-motion";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
   type MotionVariantName,
+  subtleInViewByVariant,
+  subtleTransition,
   variantMap,
-  viewportEager,
+  viewportOnce,
 } from "../../lib/motion";
 
 type Props = {
@@ -20,8 +22,8 @@ type Props = {
  * Entrance reveal for key section blocks.
  *
  * First paint / SSR stays VISIBLE. After hydrate we arm motion:
- * - already in viewport → animate in immediately (no stuck opacity:0)
- * - below fold → start hidden, reveal on scroll
+ * - already in viewport → subtle nudge (no opacity:0 flash)
+ * - below fold → full reveal on scroll
  * Honors prefers-reduced-motion.
  */
 export default function MotionReveal({
@@ -36,13 +38,14 @@ export default function MotionReveal({
   const [armed, setArmed] = useState(false);
   const [inViewOnArm, setInViewOnArm] = useState(false);
   const variants = variantMap[variant];
+  const subtle = subtleInViewByVariant[variant];
 
   useEffect(() => {
     const el = ref.current;
     if (el) {
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight || 0;
-      setInViewOnArm(rect.top < vh * 0.92 && rect.bottom > vh * 0.08);
+      setInViewOnArm(rect.top < vh * 0.88 && rect.bottom > vh * 0.1);
     }
     const id = requestAnimationFrame(() => setArmed(true));
     return () => cancelAnimationFrame(id);
@@ -74,15 +77,13 @@ export default function MotionReveal({
     );
   }
 
-  // Already on screen: play entrance once from hidden → visible
   if (inViewOnArm) {
     return (
       <motion.div
         className={className}
-        variants={variants}
-        initial="hidden"
-        animate="visible"
-        transition={{ delay }}
+        initial={subtle.initial}
+        animate={subtle.animate}
+        transition={{ ...subtleTransition, delay }}
       >
         {children}
       </motion.div>
@@ -95,7 +96,7 @@ export default function MotionReveal({
       variants={variants}
       initial="hidden"
       whileInView="visible"
-      viewport={viewportEager}
+      viewport={viewportOnce}
       transition={{ delay }}
     >
       {children}

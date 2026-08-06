@@ -43,7 +43,7 @@ const icons = {
     <div
       class="logistica-panel px-4 py-14 xs:py-16 sm:px-6 md:py-20 lg:max-w-[58%] lg:px-10 lg:py-24 xl:max-w-[54%] xl:px-16 xl:py-28"
     >
-      <MotionReveal client:visible>
+      <MotionReveal client:visible variant="fade">
         <h2
           id="logistica-heading"
           class="max-w-lg text-[1.65rem] font-bold leading-[1.15] tracking-tight xs:text-[1.85rem] sm:text-3xl md:text-4xl"
@@ -54,8 +54,8 @@ const icons = {
 
       <MotionScope
         client:visible
-        staggerDelay={0.09}
-        y={18}
+        staggerDelay={0.055}
+        y={10}
         className="mt-8 grid gap-4 md:grid-cols-2"
       >
         {

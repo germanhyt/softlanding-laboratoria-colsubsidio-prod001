@@ -19,7 +19,7 @@ import MotionScope from "@components/islands/MotionScope";
   aria-labelledby="identificacion-heading"
 >
   <div class="container">
-    <MotionReveal client:visible>
+    <MotionReveal client:visible variant="fade">
       <h2
         id="identificacion-heading"
         class="mx-auto max-w-[18rem] text-center text-[1.35rem] font-normal leading-[1.25] tracking-tight text-brand-dark xs:max-w-sm xs:text-[1.5rem] sm:max-w-xl sm:text-[1.75rem] md:max-w-3xl md:text-[2rem] lg:max-w-4xl lg:text-[2.35rem] xl:text-[2.5rem]"
@@ -36,7 +36,8 @@ import MotionScope from "@components/islands/MotionScope";
     */}
     <MotionScope
       client:visible
-      staggerDelay={0.1}
+      staggerDelay={0.055}
+      y={10}
       className="mt-10 hidden gap-4 md:mt-12 md:grid md:grid-cols-3 md:gap-4 lg:mt-14 lg:gap-6 xl:gap-7"
     >
       <ul class="contents">
@@ -66,14 +67,14 @@ import MotionScope from "@components/islands/MotionScope";
       </ul>
     </MotionScope>
 
-    {/* Mobile: carousel — peek controlled, section clips overflow-x */}
-    <MotionReveal client:visible className="mt-9 md:hidden">
+    {/* Mobile: carousel — hydrate on mobile only (client:visible nested islands fail in dev) */}
+    <div class="mt-9 md:hidden">
       <SectionSwiper
-        client:visible
+        client:media="(max-width: 767px)"
         variant="identificacion"
         cards={[...identificacion.cards]}
         className="identificacion-swiper"
       />
-    </MotionReveal>
+    </div>
   </div>
 </section>

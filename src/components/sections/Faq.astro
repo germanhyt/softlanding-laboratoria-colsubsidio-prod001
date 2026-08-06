@@ -10,7 +10,7 @@ import MotionReveal from "@components/islands/MotionReveal";
   aria-labelledby="faq-heading"
 >
   <div class="container max-w-3xl">
-    <MotionReveal client:visible>
+    <MotionReveal client:visible variant="fade">
       <h2
         id="faq-heading"
         class="text-left text-3xl font-bold tracking-tight text-brand-dark sm:text-4xl md:text-center"
@@ -19,7 +19,7 @@ import MotionReveal from "@components/islands/MotionReveal";
       </h2>
     </MotionReveal>
 
-    <MotionReveal client:visible delay={0.1} className="mt-8 md:mt-10">
+    <MotionReveal client:visible variant="fade" delay={0.05} className="mt-8 md:mt-10">
       <FaqAccordion client:visible items={[...faq.items]} />
     </MotionReveal>
   </div>

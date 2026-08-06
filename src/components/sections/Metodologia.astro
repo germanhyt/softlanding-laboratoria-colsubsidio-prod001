@@ -18,6 +18,7 @@ import MotionScope from "@components/islands/MotionScope";
   <div class="container">
     <MotionReveal
       client:visible
+      variant="fade"
       className="grid gap-5 md:gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-end lg:gap-12 xl:gap-16"
     >
       <h2
@@ -38,7 +39,8 @@ import MotionScope from "@components/islands/MotionScope";
 
     <MotionScope
       client:visible
-      staggerDelay={0.1}
+      staggerDelay={0.055}
+      y={10}
       className="mt-10 grid gap-8 sm:mt-12 sm:grid-cols-2 lg:mt-14 lg:grid-cols-4 lg:gap-6 xl:gap-7"
     >
       <ul class="contents">

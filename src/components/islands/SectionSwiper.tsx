@@ -1,4 +1,5 @@
-import { useEffect, useId, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { Swiper as SwiperType } from "swiper";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -45,10 +46,23 @@ function usePrefersReducedMotion(): boolean {
 }
 
 export default function SectionSwiper(props: Props) {
-  const paginationId = useId().replace(/:/g, "");
+  const paginationRef = useRef<HTMLDivElement>(null);
   const reducedMotion = usePrefersReducedMotion();
-  const paginationClass = `section-swiper-pagination-${paginationId}`;
   const isIdentificacion = props.variant === "identificacion";
+
+  const bindPagination = (swiper: SwiperType) => {
+    const el = paginationRef.current;
+    if (!el) return;
+
+    const pagination = swiper.params.pagination;
+    if (!pagination || typeof pagination === "boolean") return;
+
+    pagination.el = el;
+    swiper.pagination.destroy();
+    swiper.pagination.init();
+    swiper.pagination.render();
+    swiper.pagination.update();
+  };
 
   return (
     <div className={props.className}>
@@ -58,10 +72,11 @@ export default function SectionSwiper(props: Props) {
         centeredSlides={isIdentificacion}
         spaceBetween={isIdentificacion ? 12 : 0}
         speed={reducedMotion ? 0 : 350}
-        pagination={{
-          el: `.${paginationClass}`,
-          clickable: true,
-        }}
+        observer
+        observeParents
+        pagination={{ clickable: true }}
+        onBeforeInit={bindPagination}
+        onInit={bindPagination}
         /* Identificación: peek of next card; section clips with overflow-x-hidden */
         className={isIdentificacion ? "!overflow-visible" : "!overflow-hidden"}
       >
@@ -106,7 +121,8 @@ export default function SectionSwiper(props: Props) {
       </Swiper>
 
       <div
-        className={`${paginationClass} section-swiper-pagination mt-5 flex items-center justify-center gap-2.5 sm:mt-6`}
+        ref={paginationRef}
+        className="section-swiper-pagination mt-5 flex items-center justify-center gap-2.5 sm:mt-6"
       />
     </div>
   );

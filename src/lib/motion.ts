@@ -10,14 +10,14 @@ export const springSoft: Transition = {
   mass: 0.85,
 };
 
-/** Shared entrance transition — slightly quicker, shorter travel. */
+/** Shared entrance transition — short travel, quick settle. */
 const enter = {
-  duration: 0.55,
+  duration: 0.46,
   ease: easeOutExpo,
 } as const;
 
 export const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18 },
+  hidden: { opacity: 0, y: 10 },
   visible: {
     opacity: 1,
     y: 0,
@@ -26,7 +26,7 @@ export const fadeUp: Variants = {
 };
 
 export const fadeLeft: Variants = {
-  hidden: { opacity: 0, x: -18 },
+  hidden: { opacity: 0, x: -10 },
   visible: {
     opacity: 1,
     x: 0,
@@ -35,7 +35,7 @@ export const fadeLeft: Variants = {
 };
 
 export const fadeRight: Variants = {
-  hidden: { opacity: 0, x: 18 },
+  hidden: { opacity: 0, x: 10 },
   visible: {
     opacity: 1,
     x: 0,
@@ -47,16 +47,17 @@ export const fadeIn: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { duration: 0.5, ease: easeOutExpo },
+    transition: { duration: 0.42, ease: easeOutExpo },
   },
 };
 
+/** Very subtle scale — large panels only; prefer fade/up elsewhere. */
 export const scaleIn: Variants = {
-  hidden: { opacity: 0, scale: 1.03 },
+  hidden: { opacity: 0, scale: 1.008 },
   visible: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.65, ease: easeOutExpo },
+    transition: { duration: 0.48, ease: easeOutExpo },
   },
 };
 
@@ -64,8 +65,8 @@ export const stagger: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.09,
-      delayChildren: 0.04,
+      staggerChildren: 0.055,
+      delayChildren: 0.02,
     },
   },
 };
@@ -74,24 +75,17 @@ export const staggerFast: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.06,
+      staggerChildren: 0.04,
       delayChildren: 0,
     },
   },
 };
 
-/** Earlier, more reliable in-view trigger for section reveals. */
+/** Standard in-view trigger — fires when block is meaningfully on screen. */
 export const viewportOnce = {
   once: true,
-  amount: 0.15,
-  margin: "0px 0px -4% 0px",
-} as const;
-
-/** Eager trigger for dense card grids / above-the-fold blocks. */
-export const viewportEager = {
-  once: true,
-  amount: 0.08,
-  margin: "100px 0px 60px 0px",
+  amount: 0.22,
+  margin: "0px 0px -6% 0px",
 } as const;
 
 export type MotionVariantName = "up" | "left" | "right" | "fade" | "scale";
@@ -103,3 +97,20 @@ export const variantMap: Record<MotionVariantName, Variants> = {
   fade: fadeIn,
   scale: scaleIn,
 };
+
+/** No opacity flash when the block is already on screen at hydrate. */
+export const subtleInViewByVariant: Record<
+  MotionVariantName,
+  { initial: Record<string, number>; animate: Record<string, number> }
+> = {
+  up: { initial: { opacity: 1, y: 5 }, animate: { opacity: 1, y: 0 } },
+  left: { initial: { opacity: 1, x: -5 }, animate: { opacity: 1, x: 0 } },
+  right: { initial: { opacity: 1, x: 5 }, animate: { opacity: 1, x: 0 } },
+  fade: { initial: { opacity: 0.94 }, animate: { opacity: 1 } },
+  scale: { initial: { opacity: 1, scale: 1.004 }, animate: { opacity: 1, scale: 1 } },
+};
+
+export const subtleTransition = {
+  duration: 0.38,
+  ease: easeOutExpo,
+} as const;

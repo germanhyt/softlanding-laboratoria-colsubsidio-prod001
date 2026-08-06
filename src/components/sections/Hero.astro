@@ -15,19 +15,20 @@ import MotionReveal from "@components/islands/MotionReveal";
 -->
 <section
   id={hero.id}
-  class="hero relative isolate min-h-[100svh] overflow-hidden bg-brand-dark md:min-h-[min(720px,calc(100vh-4.5rem))] lg:min-h-[min(780px,calc(100vh-4.5rem))]"
+  class="hero relative isolate min-h-[100svh] overflow-hidden bg-brand-dark md:min-h-[min(800px,calc(100vh-2.5rem))] lg:min-h-[min(860px,calc(100vh-2.5rem))]"
   aria-labelledby="hero-heading"
 >
   <!-- Photo always visible — never MotionReveal (opacity:0 hid media before) -->
-  <picture class="absolute inset-0 z-0 block h-full w-full">
-    <source media="(min-width: 768px)" srcset={hero.image.src} />
-    <img
-      src={hero.imageMobile.src}
-      alt=""
-      class="h-full w-full object-cover object-[72%_center] md:object-[center_40%]"
-      aria-hidden="true"
-    />
-  </picture>
+  <div class="hero-media" aria-hidden="true">
+    <picture class="hero-media__picture">
+      <source media="(min-width: 768px)" srcset={hero.image.src} />
+      <img
+        src={hero.imageMobile.src}
+        alt=""
+        class="hero-media__photo"
+      />
+    </picture>
+  </div>
 
   <!--
     Mobile: strong top→bottom black vignette (prototype 1_mobile).
@@ -47,7 +48,7 @@ import MotionReveal from "@components/islands/MotionReveal";
   </div>
 
   <div
-    class="container relative z-10 flex min-h-[100svh] flex-col justify-center pb-28 pt-24 md:min-h-[min(720px,calc(100vh-4.5rem))] md:pb-32 md:pt-16 lg:min-h-[min(780px,calc(100vh-4.5rem))] lg:pb-36 lg:pt-20"
+    class="container relative z-10 flex min-h-[100svh] flex-col justify-center pb-28 pt-24 md:min-h-[min(800px,calc(100vh-4.5rem))] md:pb-32 md:pt-16 lg:min-h-[min(860px,calc(100vh-4.5rem))] lg:pb-36 lg:pt-24"
   >
     <!--
       Bloque de texto: ancho para ~3 líneas de H1 en desktop,
@@ -58,7 +59,7 @@ import MotionReveal from "@components/islands/MotionReveal";
       trigger="mount"
       staggerDelay={0.12}
       y={28}
-      className="mb-[4rem] lg:mb-[6rem]   max-w-[19.5rem] text-white xs:max-w-[22rem] sm:max-w-md md:max-w-[32rem] lg:max-w-[48rem] xl:max-w-[52rem]"
+      className="mb-[10rem] md:mb-[0rem]  max-w-[19.5rem] text-white xs:max-w-[22rem] sm:max-w-md md:max-w-[32rem] lg:max-w-[48rem] xl:max-w-[52rem]"
     >
       <h1
         id="hero-heading"
@@ -121,6 +122,56 @@ import MotionReveal from "@components/islands/MotionReveal";
 </section>
 
 <style>
+  /*
+    Hero background framing — explicit CSS (Tailwind arbitrary object-position
+    was not reliably shifting the crop). Scale gives headroom so translate
+    never exposes empty edges inside overflow:hidden.
+  */
+  .hero-media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .hero-media__picture,
+  .hero-media__photo {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-media__photo {
+    object-fit: cover;
+    will-change: transform;
+  }
+
+  /* Mobile — pan composition right; scale prevents edge gaps */
+  @media (max-width: 767px) {
+    .hero-media__photo {
+      object-position: 50% 50%;
+      transform: scale(1.2) translate3d(10%, 0, 0);
+      transform-origin: 50% 50%;
+    }
+  }
+
+  /* Desktop — shift focal point right for subjects + copy balance */
+  @media (min-width: 768px) {
+    .hero-media__photo {
+      object-position: 74% 38%;
+      transform: scale(1.14) translate3d(11%, 0, 0);
+      transform-origin: 68% 38%;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .hero-media__photo {
+      object-position: 78% 36%;
+      transform: scale(1.16) translate3d(12%, 0, 0);
+      transform-origin: 70% 36%;
+    }
+  }
+
   /* Mobile: top black band → fade into photo (1_mobile prototype) */
   .hero-shade-mobile {
     background: linear-gradient(

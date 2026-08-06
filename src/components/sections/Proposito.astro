@@ -10,7 +10,7 @@ import MotionReveal from "@components/islands/MotionReveal";
     body with thin magenta left rule, image large radius, items-center
   - Mobile: info/prototype/2_3_mobile_volver-al-mercado.png (bloque superior)
     stack text → image; same copy Colsubsidio
-  Motion: text fades from left, image from right
+  Motion: copy fade-up; image soft fade
 -->
 <section
   id={proposito.id}
@@ -21,7 +21,7 @@ import MotionReveal from "@components/islands/MotionReveal";
     class="container grid items-center gap-8 md:gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-16"
   >
     <!-- Text column (~5/12 desktop) -->
-    <MotionReveal client:visible variant="left" className="lg:col-span-5 xl:col-span-5">
+    <MotionReveal client:visible variant="up" className="lg:col-span-5 xl:col-span-5">
       <h2
         id="proposito-heading"
         class="text-[1.75rem] font-bold leading-[1.15] tracking-tight text-brand-dark xs:text-[1.9rem] sm:text-[2.15rem] md:text-[2.35rem] lg:text-[2.5rem] xl:text-[2.75rem]"
@@ -40,7 +40,7 @@ import MotionReveal from "@components/islands/MotionReveal";
     </MotionReveal>
 
     <!-- Image column (~7/12 desktop) -->
-    <MotionReveal client:visible variant="right" delay={0.1} className="lg:col-span-7 xl:col-span-7">
+    <MotionReveal client:visible variant="fade" delay={0.05} className="lg:col-span-7 xl:col-span-7">
       <img
         src={proposito.image.src}
         alt={proposito.image.alt}

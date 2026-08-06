@@ -31,8 +31,9 @@ import MotionScope from "@components/islands/MotionScope";
   </div>
 
   <div class="relative z-10 pt-14 xs:pt-16 md:pt-20 lg:pt-24 xl:pt-28">
-    <div class="container relative z-20 lg:max-w-[54%] xl:max-w-[52%]">
-      <MotionReveal client:visible className="max-w-3xl">
+    <div class="container">
+      <div class="relative z-20 lg:max-w-[54%] xl:max-w-[52%]">
+      <MotionReveal client:visible variant="fade" className="max-w-3xl">
         <h2
           id="experiencia-heading"
           class="text-[1.65rem] font-bold leading-[1.18] tracking-tight text-brand-dark xs:text-[1.85rem] sm:text-[2.1rem] md:text-[2.35rem] lg:text-[2.5rem]"
@@ -50,7 +51,8 @@ import MotionScope from "@components/islands/MotionScope";
 
       <MotionScope
         client:visible
-        staggerDelay={0.12}
+        staggerDelay={0.055}
+        y={10}
         className="mt-9 grid gap-4 sm:mt-11 sm:gap-5 md:grid-cols-2 lg:mt-12"
       >
         {
@@ -83,7 +85,7 @@ import MotionScope from "@components/islands/MotionScope";
         }
       </MotionScope>
 
-      <MotionReveal client:visible delay={0.15}>
+      <MotionReveal client:visible variant="fade" delay={0.06}>
         <p class="mt-5 text-sm text-brand-dark sm:text-[0.95rem]">
           {experiencia.footnote}
         </p>
@@ -96,6 +98,7 @@ import MotionScope from "@components/islands/MotionScope";
           />
         </div>
       </MotionReveal>
+      </div>
     </div>
 
     <!-- Mobile art: always visible -->
