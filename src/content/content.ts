@@ -258,12 +258,14 @@ export const requisitos = {
 export const logistica = {
   id: "logistica",
   headline: "¿Qué necesitas saber para participar?",
-  /**
-   * Office photo (desktop + mobile crop).
-   * Source: info/img/Imagen sección 8/ChatGPT Image 3 ago 2026, 07_02_44 2.webp
-   */
-  image: {
-    src: "/assets/logistica/photo.webp",
+  /** Desktop full-bleed (landscape). */
+  imageDesktop: {
+    src: "/assets/logistica/desktop.webp",
+    alt: "Dos mujeres profesionales conversando en una oficina moderna",
+  },
+  /** Mobile stacked portrait — public/assets/logistica/mobile.png */
+  imageMobile: {
+    src: "/assets/logistica/mobile.png",
     alt: "Dos mujeres profesionales conversando en una oficina moderna",
   },
   cards: [

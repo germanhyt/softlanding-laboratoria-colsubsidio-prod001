@@ -12,18 +12,36 @@ const icons = {
 
 <!--
   SoT: info/prototype/8_desktop_que-necesitas-para-participar.png
-  Desktop: left panel gradient; photo fills right column WITHOUT left fade/crop.
-  Mobile: height capped (asset is very tall) + soft top blend into panel.
-  Asset: /assets/logistica/photo.webp
+  Desktop: photo FULL WIDTH behind content + strong left black→transparent gradient.
+  Mobile:  dark panel + stacked portrait (mobile.png), height capped.
+  Assets: desktop.webp / mobile.png — never wrap media in MotionReveal.
 -->
 <section
   id={logistica.id}
-  class="logistica scroll-mt-24 overflow-hidden text-brand-neutral-white"
+  class="logistica relative scroll-mt-24 overflow-hidden text-brand-neutral-white"
   aria-labelledby="logistica-heading"
 >
-  <div class="grid lg:grid-cols-2 lg:items-stretch">
+  <!-- Desktop full-bleed photo (entire section width) -->
+  <div
+    class="pointer-events-none absolute inset-0 z-0 hidden lg:block"
+    aria-hidden="true"
+  >
+    <img
+      src={logistica.imageDesktop.src}
+      alt=""
+      class="h-full w-full object-cover object-[72%_center]"
+      loading="lazy"
+      width="3549"
+      height="1623"
+    />
+    <!-- Left black vignette over the full-bleed photo -->
+    <div class="logistica-shade absolute inset-0"></div>
+  </div>
+
+  <div class="relative z-10">
+    <!-- Content: transparent over gradient on desktop; solid dark on mobile -->
     <div
-      class="logistica-panel relative z-10 px-4 py-14 xs:py-16 sm:px-6 md:py-20 lg:px-10 lg:py-24 xl:px-16"
+      class="logistica-panel px-4 py-14 xs:py-16 sm:px-6 md:py-20 lg:max-w-[58%] lg:px-10 lg:py-24 xl:max-w-[54%] xl:px-16 xl:py-28"
     >
       <MotionReveal client:visible>
         <h2
@@ -36,7 +54,8 @@ const icons = {
 
       <MotionScope
         client:visible
-        staggerDelay={0.1}
+        staggerDelay={0.09}
+        y={18}
         className="mt-8 grid gap-4 md:grid-cols-2"
       >
         {
@@ -70,47 +89,72 @@ const icons = {
       </MotionScope>
     </div>
 
-    <MotionReveal
-      client:visible
-      variant="fade"
-      delay={0.12}
-      className="logistica-media relative w-full overflow-hidden max-lg:aspect-[4/3] max-lg:max-h-[360px] sm:max-lg:aspect-[16/11] sm:max-lg:max-h-[400px] lg:min-h-full"
+    <!-- Mobile: portrait asset below cards (not full-bleed behind) -->
+    <div
+      class="relative w-full overflow-hidden lg:hidden max-h-[420px] aspect-[11/14] sm:max-h-[460px]"
     >
       <img
-        src={logistica.image.src}
-        alt={logistica.image.alt}
-        class="absolute inset-0 h-full w-full object-cover object-center"
+        src={logistica.imageMobile.src}
+        alt={logistica.imageMobile.alt}
+        class="h-full w-full object-cover object-[center_35%]"
         loading="lazy"
-        width="3549"
-        height="1623"
+        width="440"
+        height="976"
       />
-    </MotionReveal>
+    </div>
   </div>
 </section>
 
 <style>
   .logistica {
-    background-color: #0b0b0b;
+    background-color: #0f0f0f;
   }
 
-  /* Gradient only on the content panel — never over the photo */
+  /* Mobile panel: solid dark under cards */
   .logistica-panel {
     background: linear-gradient(
-      90deg,
-      #0b0b0b 0%,
-      #181818 35%,
-      #2c2c2c 70%,
-      #454545 100%
+      180deg,
+      #1c1c1c 0%,
+      #141414 55%,
+      #0f0f0f 100%
     );
   }
 
-  @media (max-width: 1023px) {
+  @media (min-width: 1024px) {
+    /* Desktop: panel is transparent — shade lives on the photo */
     .logistica-panel {
+      background: transparent;
+    }
+  }
+
+  /*
+    Prototype desktop: photo spans full width; black fades left → transparent
+    so cards stay readable and the subjects read on the right.
+  */
+  .logistica-shade {
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.96) 0%,
+      rgba(0, 0, 0, 0.92) 18%,
+      rgba(0, 0, 0, 0.78) 34%,
+      rgba(0, 0, 0, 0.45) 48%,
+      rgba(0, 0, 0, 0.18) 60%,
+      rgba(0, 0, 0, 0.04) 72%,
+      transparent 82%
+    );
+  }
+
+  @media (min-width: 1280px) {
+    .logistica-shade {
       background: linear-gradient(
-        180deg,
-        #2a2a2a 0%,
-        #1a1a1a 50%,
-        #0f0f0f 100%
+        90deg,
+        rgba(0, 0, 0, 0.97) 0%,
+        rgba(0, 0, 0, 0.93) 16%,
+        rgba(0, 0, 0, 0.8) 30%,
+        rgba(0, 0, 0, 0.48) 46%,
+        rgba(0, 0, 0, 0.2) 58%,
+        rgba(0, 0, 0, 0.05) 70%,
+        transparent 80%
       );
     }
   }

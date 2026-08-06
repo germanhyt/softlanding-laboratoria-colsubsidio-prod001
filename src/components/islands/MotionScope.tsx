@@ -20,14 +20,14 @@ type Props = {
 
 /**
  * Staggers Astro-rendered children marked with `data-motion-item`.
- * Keeps section markup in `.astro` while still using Framer Motion.
+ * Items stay visible until JS arms; then a short entrance plays in-view.
  */
 export default function MotionScope({
   children,
   className,
   itemSelector = "[data-motion-item]",
-  staggerDelay = 0.1,
-  y = 24,
+  staggerDelay = 0.09,
+  y = 16,
   trigger = "view",
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
@@ -42,24 +42,34 @@ export default function MotionScope({
     );
     if (items.length === 0) return;
 
-    items.forEach((el) => {
-      el.style.opacity = "0";
-      el.style.transform = `translate3d(0, ${y}px, 0)`;
-      el.style.willChange = "opacity, transform";
-    });
+    let played = false;
 
     const play = () => {
-      void animate(
-        items,
-        { opacity: 1, y: 0 },
-        {
-          delay: stagger(staggerDelay),
-          duration: 0.55,
-          ease: easeOutExpo,
-        },
-      ).then(() => {
-        items.forEach((el) => {
-          el.style.willChange = "";
+      if (played) return;
+      played = true;
+
+      items.forEach((el) => {
+        el.style.opacity = "0";
+        el.style.transform = `translate3d(0, ${y}px, 0)`;
+        el.style.willChange = "opacity, transform";
+      });
+
+      // Next frame so the browser commits the hidden state before animating
+      requestAnimationFrame(() => {
+        void animate(
+          items,
+          { opacity: 1, y: 0 },
+          {
+            delay: stagger(staggerDelay),
+            duration: 0.5,
+            ease: easeOutExpo,
+          },
+        ).then(() => {
+          items.forEach((el) => {
+            el.style.willChange = "";
+            el.style.transform = "";
+            el.style.opacity = "";
+          });
         });
       });
     };
@@ -69,7 +79,7 @@ export default function MotionScope({
       return;
     }
 
-    return inView(root, play, { amount: 0.18, once: true });
+    return inView(root, play, { amount: 0.12, once: true, margin: "80px 0px 40px 0px" });
   }, [reduceMotion, itemSelector, staggerDelay, y, trigger]);
 
   return (
