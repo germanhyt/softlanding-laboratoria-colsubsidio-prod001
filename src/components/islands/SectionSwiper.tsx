@@ -74,9 +74,14 @@ export default function SectionSwiper(props: Props) {
         speed={reducedMotion ? 0 : 350}
         observer
         observeParents
-        pagination={{ clickable: true }}
+        pagination={{
+          clickable: true,
+          // External host; wired in onBeforeInit so bullets never overlay slides
+          el: null as unknown as HTMLElement,
+        }}
         onBeforeInit={bindPagination}
         onInit={bindPagination}
+        onSwiper={bindPagination}
         /* Identificación: peek of next card; section clips with overflow-x-hidden */
         className={isIdentificacion ? "!overflow-visible" : "!overflow-hidden"}
       >
@@ -122,7 +127,8 @@ export default function SectionSwiper(props: Props) {
 
       <div
         ref={paginationRef}
-        className="section-swiper-pagination mt-5 flex items-center justify-center gap-2.5 sm:mt-6"
+        className="section-swiper-pagination mt-5 w-full sm:mt-6"
+        aria-hidden="true"
       />
     </div>
   );

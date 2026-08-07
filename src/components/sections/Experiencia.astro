@@ -23,7 +23,7 @@ import MotionScope from "@components/islands/MotionScope";
     <img
       src={experiencia.artComposite.src}
       alt=""
-      class="experiencia-art-desktop__img absolute bottom-0 right-32 h-full w-auto max-w-none origin-bottom-right"
+      class="experiencia-art-desktop__img absolute bottom-0 right-0 h-full w-auto max-w-none origin-bottom-right"
       loading="lazy"
       width="1007"
       height="950"
@@ -32,7 +32,7 @@ import MotionScope from "@components/islands/MotionScope";
 
   <div class="relative z-10 pt-14 xs:pt-16 md:pt-20 lg:pt-24 xl:pt-28">
     <div class="container">
-      <div class="relative z-20 lg:max-w-[54%] xl:max-w-[52%]">
+      <div class="relative z-20 lg:max-w-[54%] xl:max-w-[52%] pb-5 md:pb-10">
       <MotionReveal client:load variant="up" className="max-w-3xl">
         <h2
           id="experiencia-heading"
@@ -71,14 +71,14 @@ import MotionScope from "@components/islands/MotionScope";
               </h3>
               <ul class="mt-4 space-y-2.5">
                 {mod.items.map((item) => (
-                  <li class="flex gap-2 text-sm leading-[1.5] text-brand-dark sm:text-[0.95rem]">
+                  <li class="flex items-start gap-2 text-sm leading-[1.5] text-brand-dark sm:text-[0.95rem]">
                     <span
-                      class="mt-0.5 shrink-0 font-bold text-brand-magenta"
+                      class="shrink-0 font-bold leading-[1.5] text-brand-magenta"
                       aria-hidden="true"
                     >
                       &gt;
                     </span>
-                    <span>{item}</span>
+                    <span class="min-w-0">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -103,14 +103,15 @@ import MotionScope from "@components/islands/MotionScope";
       </div>
     </div>
 
-    <!-- Mobile art: always visible -->
-    <div
-      class="experiencia-art-mobile relative z-10 mt-10 overflow-hidden lg:hidden"
-    >
+    <!--
+      Mobile art: full composite as in prototype/reference (no translateX crop).
+      White + magenta geometry + character must stay fully visible.
+    -->
+    <div class="experiencia-art-mobile relative z-10 mt-8 lg:hidden">
       <img
         src={experiencia.artComposite.src}
         alt={experiencia.artComposite.alt}
-        class="experiencia-art-mobile__img mx-auto block h-auto w-[90%] max-w-none origin-bottom-right object-contain object-bottom"
+        class="experiencia-art-mobile__img mx-auto block h-auto w-full max-w-md object-contain object-bottom xs:max-w-lg"
         loading="lazy"
         width="1007"
         height="950"
@@ -131,6 +132,7 @@ import MotionScope from "@components/islands/MotionScope";
   }
 
   .experiencia-art-desktop__img {
+    right: 0;
     transform: translateX(14%);
   }
 
@@ -144,9 +146,5 @@ import MotionScope from "@components/islands/MotionScope";
     .experiencia-art-desktop__img {
       transform: translateX(18%);
     }
-  }
-
-  .experiencia-art-mobile__img {
-    transform: translateX(8%);
   }
 </style>

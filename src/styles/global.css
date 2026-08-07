@@ -53,22 +53,43 @@
 }
 
 @layer components {
-  /* Swiper pagination — Identificación (yellow band): white inactive, dark active */
+  /*
+    External pagination host — kill Swiper's default absolute positioning
+    (it was parking bullets over the white card, hiding inactive dots).
+  */
+  .section-swiper-pagination.swiper-pagination {
+    position: relative !important;
+    inset: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    transform: none !important;
+  }
+
+  .section-swiper-pagination .swiper-pagination-bullet {
+    @apply !m-0 h-2.5 w-2.5 shrink-0 rounded-full opacity-100;
+  }
+
+  /* Identificación: gray (“plomo”) inactive, black active — 3 dots */
   .identificacion-swiper .swiper-pagination-bullet {
-    @apply !m-0 h-2.5 w-2.5 rounded-full bg-brand-neutral-white opacity-100;
+    background-color: #c4c4c4;
   }
 
   .identificacion-swiper .swiper-pagination-bullet-active {
-    @apply bg-brand-dark;
+    background-color: #0f191f;
   }
 
-  /* Swiper pagination — Beneficios (magenta): light grey inactive, dark active */
+  /* Beneficios (magenta panel): soft light inactive, black active — 6 dots */
   .beneficios-swiper .swiper-pagination-bullet {
-    @apply !m-0 h-2.5 w-2.5 rounded-full bg-brand-neutral-white/45 opacity-100;
+    background-color: rgba(255, 255, 255, 0.55);
   }
 
   .beneficios-swiper .swiper-pagination-bullet-active {
-    @apply bg-brand-dark;
+    background-color: #0f191f;
   }
 }
 
