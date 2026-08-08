@@ -67,10 +67,10 @@ import MotionScope from "@components/islands/MotionScope";
       </ul>
     </MotionScope>
 
-    {/* Mobile: carousel — hydrate on mobile only (client:visible nested islands fail in dev) */}
+    {/* Mobile: carousel */}
     <div class="mt-9 md:hidden">
       <SectionSwiper
-        client:media="(max-width: 767px)"
+        client:load
         variant="identificacion"
         cards={[...identificacion.cards]}
         className="identificacion-swiper"

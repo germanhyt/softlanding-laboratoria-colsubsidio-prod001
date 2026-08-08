@@ -161,6 +161,6 @@ Iteraciones:
 - En "¿Qué necesitas saber" en responsive, la imagen los acomodamos mejor el ancho completo
 - En el footer en responsive, el logo a la izquierda y texto a la derecha (poco padding a los lados)
 
-- En "Si te identificas..."  en el carousel de imágenes mostramos los indicadores (de ser necesario realizarlo con react islad)
-- En "fortalecer tu perfil..." en el carousel de imágenes mostramos los indicadores (de ser necesario realizarlo con react islad)
-
+- En "Si te identificas..."  en el carousel de imágenes, mostramos los indicadores (de ser necesario realizarlo con react islad) 
+- En "fortalecer tu perfil..." en el carousel de imágenes, mostramos los indicadores (de ser necesario realizarlo con react islad)
+dado que no aparece no aparece los indicadores en local y no veo a qué se debe

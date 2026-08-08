@@ -58,50 +58,49 @@
 }
 
 @layer components {
-  /*
-    External pagination host — kill Swiper's default absolute positioning
-    (it was parking bullets over the white card, hiding inactive dots).
-  */
-  .section-swiper-pagination.swiper-pagination {
+  /* Swiper Pagination Indicators — Generous spacing below cards without touching */
+  .swiper-pagination {
     position: relative !important;
     inset: auto !important;
     bottom: auto !important;
     left: auto !important;
+    right: auto !important;
     width: 100% !important;
     display: flex !important;
-    align-items: center;
-    justify-content: center;
-    gap: 0.625rem;
-    transform: none !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.625rem !important;
+    margin-top: 1.75rem !important;
+    z-index: 10 !important;
   }
 
-  .section-swiper-pagination .swiper-pagination-bullet {
+  .swiper-pagination-bullet {
     @apply !m-0 h-2.5 w-2.5 shrink-0 rounded-full opacity-100 transition-all duration-300;
     cursor: pointer;
   }
 
   /* Identificación: gray (“plomo”) inactive, black active — 3 dots */
   .identificacion-swiper .swiper-pagination-bullet {
-    background-color: #0f191f;
-    opacity: 0.35;
+    background-color: #0f191f !important;
+    opacity: 0.35 !important;
   }
 
   .identificacion-swiper .swiper-pagination-bullet-active {
-    background-color: #0f191f;
-    opacity: 1;
+    background-color: #0f191f !important;
+    opacity: 1 !important;
     width: 1.5rem !important;
     border-radius: 9999px !important;
   }
 
   /* Beneficios (magenta panel): soft light inactive, black active — 6 dots */
   .beneficios-swiper .swiper-pagination-bullet {
-    background-color: rgba(255, 255, 255, 0.5);
-    opacity: 0.8;
+    background-color: rgba(255, 255, 255, 0.5) !important;
+    opacity: 0.8 !important;
   }
 
   .beneficios-swiper .swiper-pagination-bullet-active {
-    background-color: #0f191f;
-    opacity: 1;
+    background-color: #0f191f !important;
+    opacity: 1 !important;
     width: 1.5rem !important;
     border-radius: 9999px !important;
   }

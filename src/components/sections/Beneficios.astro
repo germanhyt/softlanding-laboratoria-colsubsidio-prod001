@@ -84,7 +84,7 @@ import MotionScope from "@components/islands/MotionScope";
       {/* Mobile: Swiper outside scale transform (transform breaks touch in dev) */}
       <div class="md:hidden">
         <SectionSwiper
-          client:media="(max-width: 767px)"
+          client:load
           variant="beneficios"
           cards={[...beneficios.cards]}
           className="beneficios-swiper"

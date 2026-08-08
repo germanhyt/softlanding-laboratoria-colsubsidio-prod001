@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from "react";
-import type { Swiper as SwiperType } from "swiper";
+import { useEffect, useState } from "react";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -46,31 +45,13 @@ function usePrefersReducedMotion(): boolean {
 }
 
 export default function SectionSwiper(props: Props) {
-  const [paginationEl, setPaginationEl] = useState<HTMLDivElement | null>(null);
-  const swiperRef = useRef<SwiperType | null>(null);
   const reducedMotion = usePrefersReducedMotion();
   const isIdentificacion = props.variant === "identificacion";
-
-  useEffect(() => {
-    if (swiperRef.current && paginationEl) {
-      const swiper = swiperRef.current;
-      if (swiper.params.pagination && typeof swiper.params.pagination !== "boolean") {
-        swiper.params.pagination.el = paginationEl;
-        swiper.pagination.destroy();
-        swiper.pagination.init();
-        swiper.pagination.render();
-        swiper.pagination.update();
-      }
-    }
-  }, [paginationEl]);
 
   return (
     <div className={props.className}>
       <Swiper
         modules={[Pagination]}
-        onSwiper={(swiper) => {
-          swiperRef.current = swiper;
-        }}
         slidesPerView={isIdentificacion ? 1.08 : 1}
         centeredSlides={isIdentificacion}
         spaceBetween={isIdentificacion ? 12 : 0}
@@ -78,10 +59,9 @@ export default function SectionSwiper(props: Props) {
         observer
         observeParents
         pagination={{
+          el: ".swiper-pagination",
           clickable: true,
-          el: paginationEl,
         }}
-        /* Identificación: peek of next card; section clips with overflow-x-hidden */
         className={isIdentificacion ? "!overflow-visible" : "!overflow-hidden"}
       >
         {isIdentificacion
@@ -122,12 +102,10 @@ export default function SectionSwiper(props: Props) {
                 </article>
               </SwiperSlide>
             ))}
-      </Swiper>
 
-      <div
-        ref={setPaginationEl}
-        className="section-swiper-pagination mt-5 flex items-center justify-center gap-2.5 sm:mt-6"
-      />
+        {/* Contenedor de paginación declarado en JSX (presente en SSR + React VDOM, nunca se elimina) */}
+        <div className="swiper-pagination" />
+      </Swiper>
     </div>
   );
 }
