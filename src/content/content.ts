@@ -24,7 +24,7 @@ export const logos = {
     alt: "Laboratoria",
   },
   colsubsidio: {
-    src: "/assets/logos/logo-colsubsidio.webp",
+    src: "/assets/logos/logo-colsubsidio.png",
     alt: "Colsubsidio",
   },
 } as const;

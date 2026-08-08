@@ -9,16 +9,14 @@ type Props = {
   links: MobileNavLink[];
   conocenosUrl: string;
   postularUrl: string;
-  logoSrc: string;
-  logoAlt: string;
+  logoSrc?: string;
+  logoAlt?: string;
 };
 
 export default function MobileNav({
   links,
   conocenosUrl,
   postularUrl,
-  logoSrc,
-  logoAlt,
 }: Props) {
   const panelId = useId();
   const [open, setOpen] = useState(false);
@@ -36,6 +34,20 @@ export default function MobileNav({
       window.removeEventListener("resize", sync);
     };
   }, []);
+
+  useEffect(() => {
+    const headerEl = document.getElementById("site-header");
+    if (!headerEl) return;
+
+    if (open) {
+      headerEl.classList.add("is-solid", "is-nav-open");
+    } else {
+      headerEl.classList.remove("is-nav-open");
+      if (window.scrollY <= 24 && window.innerWidth < 1024) {
+        headerEl.classList.remove("is-solid");
+      }
+    }
+  }, [open]);
 
   useEffect(() => {
     if (!open) return;
@@ -62,9 +74,7 @@ export default function MobileNav({
       <button
         type="button"
         className={`inline-flex h-10 w-10 items-center justify-center rounded-md transition ${
-          iconOnDark
-            ? "text-brand-neutral-white"
-            : "text-brand-dark"
+          iconOnDark ? "text-brand-neutral-white" : "text-brand-dark"
         }`}
         aria-label={open ? "Cerrar menú" : "Abrir menú"}
         aria-expanded={open}
@@ -99,8 +109,9 @@ export default function MobileNav({
         )}
       </button>
 
+      {/* Backdrop overlay below header */}
       <div
-        className={`fixed inset-0 z-40 bg-brand-dark/40 transition-opacity duration-300 ${
+        className={`fixed inset-x-0 top-14 sm:top-16 bottom-0 z-30 bg-brand-dark/30 transition-opacity duration-300 ${
           open
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0"
@@ -109,57 +120,21 @@ export default function MobileNav({
         onClick={close}
       />
 
+      {/* Mobile navigation panel — appearing directly below header with clippy radial reveal */}
       <nav
         id={panelId}
         aria-label="Menú móvil"
-        className={`fixed inset-y-0 right-0 z-50 flex w-[min(100%,20rem)] flex-col bg-brand-neutral-white shadow-xl transition-[clip-path,transform] duration-300 ease-out motion-reduce:transition-none ${
-          open
-            ? "[clip-path:inset(0_0_0_0)] translate-x-0"
-            : "[clip-path:inset(0_0_0_100%)] translate-x-4"
+        className={`mobile-nav-clippy fixed inset-x-0 top-14 sm:top-16 bottom-0 z-40 flex flex-col justify-between border-t border-brand-dark/10 bg-brand-neutral-white px-6 py-6 shadow-2xl ${
+          open ? "is-open" : ""
         }`}
         {...(!open ? { inert: true as const } : {})}
       >
-        <div className="flex items-center justify-between border-b border-brand-dark/10 px-5 py-4">
-          <a
-            href="#inicio"
-            className="inline-flex items-center"
-            aria-label={`${logoAlt} — inicio`}
-            onClick={close}
-          >
-            <img
-              src={logoSrc}
-              alt={logoAlt}
-              className="h-6 w-auto"
-              width={140}
-              height={18}
-            />
-          </a>
-          <button
-            type="button"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-md text-brand-dark"
-            aria-label="Cerrar menú"
-            onClick={close}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              className="h-5 w-5"
-              aria-hidden="true"
-            >
-              <path strokeLinecap="round" d="M6 6l12 12M18 6L6 18" />
-            </svg>
-          </button>
-        </div>
-
-        <ul className="flex flex-1 flex-col gap-1 px-3 py-4">
+        <ul className="flex flex-col gap-1 overflow-y-auto py-2">
           {links.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
-                className="block rounded-xl px-4 py-3 text-base font-medium text-brand-dark transition hover:bg-brand-neutral-mist"
+                className="block rounded-xl px-4 py-3.5 text-base font-semibold text-brand-dark transition hover:bg-brand-neutral-mist hover:text-brand-magenta"
                 onClick={close}
               >
                 {link.label}
@@ -171,7 +146,7 @@ export default function MobileNav({
               href={conocenosUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="block rounded-xl px-4 py-3 text-base font-medium text-brand-dark transition hover:bg-brand-neutral-mist"
+              className="block rounded-xl px-4 py-3.5 text-base font-semibold text-brand-dark transition hover:bg-brand-neutral-mist hover:text-brand-magenta"
               onClick={close}
             >
               Conócenos
@@ -179,10 +154,10 @@ export default function MobileNav({
           </li>
         </ul>
 
-        <div className="border-t border-brand-dark/10 p-5">
+        <div className="border-t border-brand-dark/10 pt-5 pb-2">
           <a
             href={postularUrl}
-            className="inline-flex w-full items-center justify-center rounded-full bg-brand-yellow px-5 py-3 text-base font-bold text-brand-neutral-black transition hover:bg-brand-yellow-soft"
+            className="inline-flex w-full items-center justify-center rounded-full bg-brand-yellow px-6 py-3.5 text-base font-bold text-brand-neutral-black transition hover:bg-brand-yellow-soft shadow-md active:scale-[0.99]"
             onClick={close}
           >
             Postular

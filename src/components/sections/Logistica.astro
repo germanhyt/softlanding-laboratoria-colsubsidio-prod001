@@ -38,10 +38,10 @@ const icons = {
     <div class="logistica-shade absolute inset-0"></div>
   </div>
 
-  <div class=" sm:container relative z-10">
+  <div class=" relative z-10">
     <!-- Content: transparent over gradient on desktop; solid dark on mobile -->
     <div
-      class="container sm:mx-0 sm:px-0 logistica-panel py-14 xs:py-16 md:py-20 lg:max-w-[58%] lg:py-24 xl:max-w-[54%] xl:py-28"
+      class="container logistica-panel py-14 xs:py-16 md:py-20 lg:max-w-[58%] lg:py-24 xl:max-w-[54%] xl:py-28"
     >
       <MotionReveal client:load variant="left">
         <h2
@@ -129,40 +129,44 @@ const icons = {
     }
   }
 
-  /* Desktop photo positioning — shift image right so BOTH women are framed on the right */
+  /* Desktop photo positioning — scale + translate shifts photo right so subjects are fully visible */
   .logistica-photo {
-    object-position: 88% center;
-    transform: scale(1.08) translate3d(6%, 0, 0);
-    transform-origin: 88% center;
+    object-position: 65% center;
+    transform: scale(1.15) translate3d(10%, 0, 0);
+    transform-origin: 65% center;
     will-change: transform;
   }
 
   @media (min-width: 1280px) {
     .logistica-photo {
-      object-position: 92% center;
-      transform: scale(1.1) translate3d(8%, 0, 0);
-      transform-origin: 92% center;
+      object-position: 68% center;
+      transform: scale(1.18) translate3d(12%, 0, 0);
+      transform-origin: 68% center;
     }
   }
 
   @media (min-width: 1536px) {
     .logistica-photo {
-      object-position: 96% center;
-      transform: scale(1.12) translate3d(10%, 0, 0);
-      transform-origin: 96% center;
+      object-position: 70% center;
+      transform: scale(1.2) translate3d(14%, 0, 0);
+      transform-origin: 70% center;
     }
   }
 
-  /* Black vignette over left content side, transparent on the right to reveal both women */
+  /*
+    Prototype desktop: photo spans full width; black fades left → transparent
+    so cards stay readable and the subjects read on the right.
+  */
   .logistica-shade {
     background: linear-gradient(
       90deg,
-      rgba(0, 0, 0, 0.98) 0%,
-      rgba(0, 0, 0, 0.94) 28%,
-      rgba(0, 0, 0, 0.8) 45%,
-      rgba(0, 0, 0, 0.35) 58%,
-      rgba(0, 0, 0, 0.05) 68%,
-      transparent 76%
+      rgba(0, 0, 0, 0.96) 0%,
+      rgba(0, 0, 0, 0.92) 18%,
+      rgba(0, 0, 0, 0.78) 34%,
+      rgba(0, 0, 0, 0.45) 48%,
+      rgba(0, 0, 0, 0.18) 60%,
+      rgba(0, 0, 0, 0.04) 72%,
+      transparent 82%
     );
   }
 
@@ -170,12 +174,13 @@ const icons = {
     .logistica-shade {
       background: linear-gradient(
         90deg,
-        rgba(0, 0, 0, 0.98) 0%,
-        rgba(0, 0, 0, 0.94) 26%,
-        rgba(0, 0, 0, 0.78) 42%,
-        rgba(0, 0, 0, 0.3) 54%,
-        rgba(0, 0, 0, 0.04) 64%,
-        transparent 72%
+        rgba(0, 0, 0, 0.97) 0%,
+        rgba(0, 0, 0, 0.93) 16%,
+        rgba(0, 0, 0, 0.8) 30%,
+        rgba(0, 0, 0, 0.48) 46%,
+        rgba(0, 0, 0, 0.2) 58%,
+        rgba(0, 0, 0, 0.05) 70%,
+        transparent 80%
       );
     }
   }
