@@ -38,10 +38,10 @@ const icons = {
     <div class="logistica-shade absolute inset-0"></div>
   </div>
 
-  <div class=" relative z-10">
+  <div class="container relative z-10">
     <!-- Content: transparent over gradient on desktop; solid dark on mobile -->
     <div
-      class="container logistica-panel py-14 xs:py-16 md:py-20 lg:max-w-[58%] lg:py-24 xl:max-w-[54%] xl:py-28"
+      class="logistica-panel py-14 xs:py-16 md:py-20 lg:max-w-[500px] lg:py-24 xl:max-w-[540px] xl:py-28"
     >
       <MotionReveal client:load variant="left">
         <h2
@@ -129,27 +129,27 @@ const icons = {
     }
   }
 
-  /* Desktop photo positioning — scale + translate shifts photo right so subjects are fully visible */
+  /* Desktop photo positioning — scale + translate shifts photo right so subjects sit clean on the right */
   .logistica-photo {
-    object-position: 65% center;
-    transform: scale(1.15) translate3d(10%, 0, 0);
-    transform-origin: 65% center;
+    object-position: 72% center;
+    transform: scale(1.18) translate3d(10%, 0, 0);
+    transform-origin: 72% center;
     will-change: transform;
   }
 
   @media (min-width: 1280px) {
     .logistica-photo {
-      object-position: 68% center;
-      transform: scale(1.18) translate3d(12%, 0, 0);
-      transform-origin: 68% center;
+      object-position: 75% center;
+      transform: scale(1.22) translate3d(12%, 0, 0);
+      transform-origin: 75% center;
     }
   }
 
   @media (min-width: 1536px) {
     .logistica-photo {
-      object-position: 70% center;
-      transform: scale(1.2) translate3d(14%, 0, 0);
-      transform-origin: 70% center;
+      object-position: 78% center;
+      transform: scale(1.25) translate3d(14%, 0, 0);
+      transform-origin: 78% center;
     }
   }
 
@@ -160,13 +160,12 @@ const icons = {
   .logistica-shade {
     background: linear-gradient(
       90deg,
-      rgba(0, 0, 0, 0.96) 0%,
-      rgba(0, 0, 0, 0.92) 18%,
-      rgba(0, 0, 0, 0.78) 34%,
-      rgba(0, 0, 0, 0.45) 48%,
-      rgba(0, 0, 0, 0.18) 60%,
-      rgba(0, 0, 0, 0.04) 72%,
-      transparent 82%
+      #0f0f0f 0%,
+      rgba(15, 15, 15, 0.98) 20%,
+      rgba(15, 15, 15, 0.85) 32%,
+      rgba(15, 15, 15, 0.3) 44%,
+      rgba(15, 15, 15, 0.05) 54%,
+      transparent 62%
     );
   }
 
@@ -174,13 +173,12 @@ const icons = {
     .logistica-shade {
       background: linear-gradient(
         90deg,
-        rgba(0, 0, 0, 0.97) 0%,
-        rgba(0, 0, 0, 0.93) 16%,
-        rgba(0, 0, 0, 0.8) 30%,
-        rgba(0, 0, 0, 0.48) 46%,
-        rgba(0, 0, 0, 0.2) 58%,
-        rgba(0, 0, 0, 0.05) 70%,
-        transparent 80%
+        #0f0f0f 0%,
+        rgba(15, 15, 15, 0.98) 18%,
+        rgba(15, 15, 15, 0.82) 28%,
+        rgba(15, 15, 15, 0.25) 40%,
+        rgba(15, 15, 15, 0.04) 50%,
+        transparent 58%
       );
     }
   }
