@@ -163,4 +163,4 @@ Iteraciones:
 
 - En "Si te identificas..."  en el carousel de imágenes, mostramos los indicadores (de ser necesario realizarlo con react islad) 
 - En "fortalecer tu perfil..." en el carousel de imágenes, mostramos los indicadores (de ser necesario realizarlo con react islad)
-dado que no aparece no aparece los indicadores en local y no veo a qué se debe
+dado que no aparece no aparece los indicadores en local y no veo a qué se debe, estás usando swiper?

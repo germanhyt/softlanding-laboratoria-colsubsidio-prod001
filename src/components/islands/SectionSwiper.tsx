@@ -67,17 +67,17 @@ export default function SectionSwiper(props: Props) {
         {isIdentificacion
           ? props.cards.map((card) => (
               <SwiperSlide key={card.label} className="!h-auto">
-                <article className="flex h-full flex-col rounded-[1.5rem] bg-brand-neutral-white px-6 py-7 shadow-[0_2px_12px_rgba(15,25,31,0.06)]">
+                <article className="flex h-full min-h-[300px] flex-col rounded-[1.5rem] bg-brand-neutral-white px-6 py-7 shadow-[0_2px_12px_rgba(15,25,31,0.06)] xs:min-h-[285px]">
                   <span className="mx-auto inline-flex w-fit rounded-full border border-brand-dark px-4 py-1 text-sm font-medium text-brand-dark">
                     {card.label}
                   </span>
                   <img
                     src={card.image.src}
                     alt={card.image.alt}
-                    className="mx-auto mt-6 h-40 w-auto max-w-full object-contain"
+                    className="mx-auto mt-6 h-36 w-auto max-w-full object-contain xs:h-40"
                     loading="lazy"
                   />
-                  <p className="mt-6 text-center text-sm leading-[1.5] text-brand-dark">
+                  <p className="mt-auto pt-6 text-center text-sm leading-[1.5] text-brand-dark">
                     {card.body}
                   </p>
                 </article>
@@ -85,17 +85,19 @@ export default function SectionSwiper(props: Props) {
             ))
           : props.cards.map((card) => (
               <SwiperSlide key={card.title} className="!h-auto">
-                <article className="rounded-[1.15rem] bg-brand-neutral-white p-5 sm:p-6">
-                  <img
-                    src={card.image.src}
-                    alt=""
-                    className="h-11 w-11 object-contain"
-                    aria-hidden="true"
-                    loading="lazy"
-                  />
-                  <h3 className="mt-4 text-base font-bold leading-snug text-brand-dark">
-                    {card.title}
-                  </h3>
+                <article className="flex h-full min-h-[220px] flex-col justify-between rounded-[1.15rem] bg-brand-neutral-white p-5 xs:min-h-[210px] sm:p-6">
+                  <div>
+                    <img
+                      src={card.image.src}
+                      alt=""
+                      className="h-11 w-11 object-contain"
+                      aria-hidden="true"
+                      loading="lazy"
+                    />
+                    <h3 className="mt-4 text-base font-bold leading-snug text-brand-dark">
+                      {card.title}
+                    </h3>
+                  </div>
                   <p className="mt-2 text-sm leading-[1.5] text-brand-dark/85">
                     {card.body}
                   </p>
