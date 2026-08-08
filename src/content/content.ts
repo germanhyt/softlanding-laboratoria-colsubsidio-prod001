@@ -37,7 +37,7 @@ export const hero = {
     "Colsubsidio y Laboratoria presentan un programa gratuito de 10 semanas para fortalecer tu perfil, desarrollar habilidades digitales y construir una estrategia clara para tu búsqueda de empleo.",
   cta: { label: "Postular", href: siteConfig.postularUrl },
   image: {
-    src: "/assets/hero/hero.webp",
+    src: "/assets/hero/hero.png",
     alt: "Dos mujeres profesionales colaborando en un entorno de oficina moderno",
   },
   imageMobile: {

@@ -150,25 +150,33 @@ import MotionReveal from "@components/islands/MotionReveal";
   @media (max-width: 767px) {
     .hero-media__photo {
       object-position: 50% 50%;
-      transform: scale(1.2) translate3d(10%, 0, 0);
+      transform: scale(1.1) translate3d(4%, 0, 0);
       transform-origin: 50% 50%;
     }
   }
 
-  /* Desktop — shift focal point right for subjects + copy balance */
+  /* Desktop — shift focal point right for subjects + copy balance without translate distortion */
   @media (min-width: 768px) {
     .hero-media__photo {
-      object-position: 74% 38%;
-      transform: scale(1.14) translate3d(11%, 0, 0);
-      transform-origin: 68% 38%;
+      object-position: 82% 36%;
+      transform: scale(1.04);
+      transform-origin: 82% 36%;
     }
   }
 
   @media (min-width: 1280px) {
     .hero-media__photo {
-      object-position: 78% 36%;
-      transform: scale(1.16) translate3d(12%, 0, 0);
-      transform-origin: 70% 36%;
+      object-position: 85% 36%;
+      transform: scale(1.05);
+      transform-origin: 85% 36%;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .hero-media__photo {
+      object-position: 88% 36%;
+      transform: scale(1.06);
+      transform-origin: 88% 36%;
     }
   }
 
