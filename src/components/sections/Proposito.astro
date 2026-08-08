@@ -20,8 +20,8 @@ import MotionReveal from "@components/islands/MotionReveal";
   <div
     class="container grid items-center gap-8 md:gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-16"
   >
-    <!-- Text column (~5/12 desktop) -->
-    <div class="lg:col-span-5 xl:col-span-5">
+    <!-- Text column (more space for text) -->
+    <div class="lg:col-span-7 xl:col-span-7">
       <MotionReveal client:load variant="left">
         <h2
           id="proposito-heading"
@@ -35,19 +35,19 @@ import MotionReveal from "@components/islands/MotionReveal";
       </MotionReveal>
       <MotionReveal client:load variant="left" delay={0.06}>
         <p
-          class="proposito-body mt-6 max-w-md border-l-2 border-brand-magenta pl-4 text-[0.9375rem] leading-[1.55] text-brand-dark sm:mt-7 sm:pl-5 sm:text-base md:mt-8 md:max-w-lg md:text-[1.05rem] md:leading-[1.55] lg:text-lg lg:leading-[1.55]"
+          class="proposito-body mt-6 max-w-lg border-l-2 border-brand-magenta pl-4 text-[0.9375rem] leading-[1.55] text-brand-dark sm:mt-7 sm:pl-5 sm:text-base md:mt-8 md:max-w-xl md:text-[1.05rem] md:leading-[1.55] lg:text-lg lg:leading-[1.55]"
         >
           {proposito.body}
         </p>
       </MotionReveal>
     </div>
 
-    <!-- Image column (~7/12 desktop) -->
-    <MotionReveal client:load variant="right" delay={0.1} className="lg:col-span-7 xl:col-span-7">
+    <!-- Image column (compact space for photo) -->
+    <MotionReveal client:load variant="right" delay={0.1} className="lg:col-span-5 xl:col-span-5">
       <img
         src={proposito.image.src}
         alt={proposito.image.alt}
-        class="aspect-[5/3] h-auto w-full rounded-[1.25rem] object-cover object-center shadow-sm sm:rounded-[1.5rem] md:aspect-[8/5] lg:rounded-[1.75rem]"
+        class="aspect-[4/3] h-auto w-full rounded-[1.25rem] object-cover object-center shadow-sm sm:rounded-[1.5rem] md:aspect-[1.38/1] lg:rounded-[1.75rem]"
         loading="lazy"
         width="1320"
         height="800"
