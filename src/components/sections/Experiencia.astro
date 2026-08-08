@@ -12,7 +12,7 @@ import MotionScope from "@components/islands/MotionScope";
 -->
 <section
   id={experiencia.id}
-  class="experiencia relative scroll-mt-24 bg-brand-yellow"
+  class="experiencia relative scroll-mt-24 overflow-hidden bg-brand-yellow"
   aria-labelledby="experiencia-heading"
 >
   <!-- Desktop art: plain markup so it never stays at opacity 0 -->
@@ -133,18 +133,18 @@ import MotionScope from "@components/islands/MotionScope";
 
   .experiencia-art-desktop__img {
     right: 0;
-    transform: translateX(14%);
+    transform: translateX(-2%);
   }
 
   @media (min-width: 1280px) {
     .experiencia-art-desktop__img {
-      transform: translateX(16%);
+      transform: translateX(0%);
     }
   }
 
   @media (min-width: 1536px) {
     .experiencia-art-desktop__img {
-      transform: translateX(18%);
+      transform: translateX(2%);
     }
   }
 </style>

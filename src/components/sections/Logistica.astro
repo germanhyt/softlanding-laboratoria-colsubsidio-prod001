@@ -23,13 +23,13 @@ const icons = {
 >
   <!-- Desktop full-bleed photo (entire section width) -->
   <div
-    class="pointer-events-none absolute inset-0 z-0 hidden lg:block"
+    class="pointer-events-none absolute inset-0 z-0 hidden overflow-hidden lg:block"
     aria-hidden="true"
   >
     <img
       src={logistica.imageDesktop.src}
       alt=""
-      class="h-full w-full object-cover object-[72%_center]"
+      class="logistica-photo h-full w-full object-cover"
       loading="lazy"
       width="3549"
       height="1623"
@@ -38,10 +38,10 @@ const icons = {
     <div class="logistica-shade absolute inset-0"></div>
   </div>
 
-  <div class="relative z-10">
+  <div class=" relative z-10">
     <!-- Content: transparent over gradient on desktop; solid dark on mobile -->
     <div
-      class="logistica-panel px-4 py-14 xs:py-16 sm:px-6 md:py-20 lg:max-w-[58%] lg:px-10 lg:py-24 xl:max-w-[54%] xl:px-16 xl:py-28"
+      class="container logistica-panel py-14 xs:py-16 md:py-20 lg:max-w-[58%] lg:py-24 xl:max-w-[54%] xl:py-28"
     >
       <MotionReveal client:load variant="left">
         <h2
@@ -126,6 +126,30 @@ const icons = {
     /* Desktop: panel is transparent — shade lives on the photo */
     .logistica-panel {
       background: transparent;
+    }
+  }
+
+  /* Desktop photo positioning — scale + translate shifts photo right so subjects are fully visible */
+  .logistica-photo {
+    object-position: 65% center;
+    transform: scale(1.15) translate3d(10%, 0, 0);
+    transform-origin: 65% center;
+    will-change: transform;
+  }
+
+  @media (min-width: 1280px) {
+    .logistica-photo {
+      object-position: 68% center;
+      transform: scale(1.18) translate3d(12%, 0, 0);
+      transform-origin: 68% center;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .logistica-photo {
+      object-position: 70% center;
+      transform: scale(1.2) translate3d(14%, 0, 0);
+      transform-origin: 70% center;
     }
   }
 

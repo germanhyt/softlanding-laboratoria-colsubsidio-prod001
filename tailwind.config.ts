@@ -19,11 +19,19 @@ export default {
         center: true,
         padding: {
           DEFAULT: "1rem",
-          sm: "1.2rem",
+          xs: "1rem",
+          sm: "1.25rem",
           md: "1.5rem",
           lg: "2rem",
-          xl: "3rem",
-          "2xl": "6rem",
+          xl: "2.5rem",
+          "2xl": "3rem",
+        },
+        screens: {
+          sm: "640px",
+          md: "768px",
+          lg: "1024px",
+          xl: "1280px",
+          "2xl": "1360px",
         },
       },
       fontFamily: {

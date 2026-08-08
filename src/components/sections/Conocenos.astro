@@ -52,11 +52,11 @@ import MotionReveal from "@components/islands/MotionReveal";
       </MotionReveal>
     </div>
 
-    <MotionReveal client:load variant="right" delay={0.1} className="conocenos-art relative z-10 overflow-hidden">
+    <MotionReveal client:load variant="right" delay={0.1} className="conocenos-art relative z-10">
       <img
         src={conocenos.image.src}
         alt={conocenos.image.alt}
-        class="conocenos-art__img mx-auto block h-auto w-full max-w-md object-contain sm:max-w-lg lg:ml-auto lg:mr-0 lg:max-w-none lg:w-[115%]"
+        class="conocenos-art__img mx-auto block h-auto w-full max-w-md object-contain sm:max-w-lg lg:ml-auto lg:mr-0 lg:max-w-[560px] xl:max-w-[620px]"
         loading="lazy"
         width="720"
         height="640"
@@ -126,10 +126,6 @@ import MotionReveal from "@components/islands/MotionReveal";
       -webkit-mask-position: 12% center;
       mask-position: 12% center;
       opacity: 0.72;
-    }
-
-    .conocenos-art__img {
-      transform: translateX(10%);
     }
   }
 

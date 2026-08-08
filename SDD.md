@@ -145,3 +145,22 @@ export default defineConfig({
 
 
 ====================================================
+
+
+Iteraciones:
+
+- En "Hero Banner" alienamos logos de colsubsidio y laboratoria
+- En "Así será tu experiencia" la imagen movemos poco más a la izquierda 
+- En "¿Qué necesitas saber" la imagen de fondo movemos a la derecha
+- En "Más de 10 años impulsando" la imagen que pueda ver el ancho completo para que no se corte y acomodarlo
+
+
+
+
+- En "preguntas frecuentes" en responsive, el tìtulo al medio
+- En "¿Qué necesitas saber" en responsive, la imagen los acomodamos mejor el ancho completo
+- En el footer en responsive, el logo a la izquierda y texto a la derecha (poco padding a los lados)
+
+- En "Si te identificas..."  en el carousel de imágenes mostramos los indicadores (de ser necesario realizarlo con react islad)
+- En "fortalecer tu perfil..." en el carousel de imágenes mostramos los indicadores (de ser necesario realizarlo con react islad)
+

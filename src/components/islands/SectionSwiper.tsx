@@ -46,28 +46,31 @@ function usePrefersReducedMotion(): boolean {
 }
 
 export default function SectionSwiper(props: Props) {
-  const paginationRef = useRef<HTMLDivElement>(null);
+  const [paginationEl, setPaginationEl] = useState<HTMLDivElement | null>(null);
+  const swiperRef = useRef<SwiperType | null>(null);
   const reducedMotion = usePrefersReducedMotion();
   const isIdentificacion = props.variant === "identificacion";
 
-  const bindPagination = (swiper: SwiperType) => {
-    const el = paginationRef.current;
-    if (!el) return;
-
-    const pagination = swiper.params.pagination;
-    if (!pagination || typeof pagination === "boolean") return;
-
-    pagination.el = el;
-    swiper.pagination.destroy();
-    swiper.pagination.init();
-    swiper.pagination.render();
-    swiper.pagination.update();
-  };
+  useEffect(() => {
+    if (swiperRef.current && paginationEl) {
+      const swiper = swiperRef.current;
+      if (swiper.params.pagination && typeof swiper.params.pagination !== "boolean") {
+        swiper.params.pagination.el = paginationEl;
+        swiper.pagination.destroy();
+        swiper.pagination.init();
+        swiper.pagination.render();
+        swiper.pagination.update();
+      }
+    }
+  }, [paginationEl]);
 
   return (
     <div className={props.className}>
       <Swiper
         modules={[Pagination]}
+        onSwiper={(swiper) => {
+          swiperRef.current = swiper;
+        }}
         slidesPerView={isIdentificacion ? 1.08 : 1}
         centeredSlides={isIdentificacion}
         spaceBetween={isIdentificacion ? 12 : 0}
@@ -76,12 +79,8 @@ export default function SectionSwiper(props: Props) {
         observeParents
         pagination={{
           clickable: true,
-          // External host; wired in onBeforeInit so bullets never overlay slides
-          el: null as unknown as HTMLElement,
+          el: paginationEl,
         }}
-        onBeforeInit={bindPagination}
-        onInit={bindPagination}
-        onSwiper={bindPagination}
         /* Identificación: peek of next card; section clips with overflow-x-hidden */
         className={isIdentificacion ? "!overflow-visible" : "!overflow-hidden"}
       >
@@ -126,9 +125,8 @@ export default function SectionSwiper(props: Props) {
       </Swiper>
 
       <div
-        ref={paginationRef}
-        className="section-swiper-pagination mt-5 w-full sm:mt-6"
-        aria-hidden="true"
+        ref={setPaginationEl}
+        className="section-swiper-pagination mt-5 flex items-center justify-center gap-2.5 sm:mt-6"
       />
     </div>
   );
