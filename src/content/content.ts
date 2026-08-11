@@ -24,7 +24,7 @@ export const logos = {
     alt: "Laboratoria",
   },
   colsubsidio: {
-    src: "/assets/logos/logo-colsubsidio.png",
+    src: "/assets/logos/logo-colsubsidio.webp",
     alt: "Colsubsidio",
   },
 } as const;
@@ -37,7 +37,7 @@ export const hero = {
     "Colsubsidio y Laboratoria presentan un programa gratuito de 10 semanas para fortalecer tu perfil, desarrollar habilidades digitales y construir una estrategia clara para tu búsqueda de empleo.",
   cta: { label: "Postular", href: siteConfig.postularUrl },
   image: {
-    src: "/assets/hero/hero.png",
+    src: "/assets/hero/hero.webp",
     alt: "Dos mujeres profesionales colaborando en un entorno de oficina moderno",
   },
   imageMobile: {

@@ -3,7 +3,7 @@ import { siteConfig } from "./site.config";
 const title = "Laboratoria × Colsubsidio | Soft Landing";
 const description =
   "Programa gratuito de 10 semanas para impulsar tu inserción laboral con Laboratoria y Colsubsidio.";
-const ogImage = `${siteConfig.siteUrl}/assets/hero/hero.png`;
+const ogImage = `${siteConfig.siteUrl}/assets/hero/hero.webp`;
 
 /**
  * SEO meta for the landing. Canonical / Open Graph / Twitter derive from `siteUrl`.
