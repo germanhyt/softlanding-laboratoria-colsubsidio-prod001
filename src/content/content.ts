@@ -331,7 +331,7 @@ export const faq = {
   items: [
     {
       q: "¿Quiénes pueden postular?",
-      a: "Mujeres de la red de Colsubsidio que actualmente están buscando empleo, tienen 18 años o más, residen en Bogotá y cuentan con experiencia laboral previa. Además, deben tener disponibilidad para participar durante las 10 semanas del programa.",
+      a: "Mujeres pertenecientes a la red de Colsubsidio, que actualmente buscan empleo, tienen 18 años o más, residen en Bogotá, cuentan con experiencia laboral previa y pueden dedicar aproximadamente 15 horas por semana durante las 10 semanas del programa.",
       needsReview: false,
     },
     {
@@ -346,7 +346,7 @@ export const faq = {
     },
     {
       q: "¿Cuánto tiempo debo dedicar cada semana?",
-      a: "La dedicación estimada es de 11,5 horas por semana: 7,5 horas de sesiones en vivo y aproximadamente 4 horas de trabajo autónomo.",
+      a: "Aproximadamente 15 horas por semana: 10 horas en 4 sesiones en vivo, y 5 horas de trabajo individual.",
       needsReview: false,
     },
     {
@@ -361,12 +361,17 @@ export const faq = {
     },
     {
       q: "¿Cuándo inicia?",
-      a: "La próxima edición iniciará el X. Las participantes seleccionadas recibirán por correo toda la información necesaria antes del inicio del programa.",
+      a: "El programa inicia el 21 de septiembre y la convocatoria para postular estará abierta desde el 27 de agosto hasta el 11 de septiembre.",
       needsReview: false,
     },
     {
       q: "¿Qué pasa después de postular?",
       a: "Recibirás las novedades del proceso en el correo que registraste. Te recomendamos revisar también las carpetas de spam o promociones para no perder ninguna comunicación.",
+      needsReview: false,
+    },
+    {
+      q: "¿Me garantizan que conseguiré trabajo?",
+      a: "El programa no es una bolsa de empleo, pero sí busca preparar a las participantes con las herramientas, la estrategia y la confianza para presentarse mejor a procesos de selección y aumentar sus posibilidades. Dentro del programa habrá espacios de conexión con empresas para promover oportunidades laborales.",
       needsReview: false,
     },
   ] satisfies FaqItem[],
