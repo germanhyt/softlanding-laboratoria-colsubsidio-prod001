@@ -100,7 +100,7 @@ export const beneficios = {
     " para mejorar tu búsqueda de empleo, actualizar tus habilidades digitales y prepararte mejor para los procesos de selección.",
   cards: [
     {
-      title: "Recuperarás la confianza en tu perfil profesional",
+      title: "Recupera la confianza en tu perfil profesional",
       body: "Reconocerás tus fortalezas y lo que puedes aportar para volver a postular con mayor seguridad.",
       image: {
         src: "/assets/beneficios/icon-1.webp",
@@ -108,7 +108,7 @@ export const beneficios = {
       },
     },
     {
-      title: "Construirás una estrategia clara de búsqueda laboral",
+      title: "Construye una estrategia clara de búsqueda laboral",
       body: "Definirás tus objetivos y organizarás acciones concretas para avanzar con mayor enfoque.",
       image: {
         src: "/assets/beneficios/icon-2.webp",
@@ -116,7 +116,7 @@ export const beneficios = {
       },
     },
     {
-      title: "Te prepararás para los procesos de selección",
+      title: "Prepárate para los procesos de selección",
       body: "Practicarás cómo presentar tu perfil y afrontar entrevistas con mayor preparación y confianza.",
       image: {
         src: "/assets/beneficios/icon-3.webp",
@@ -124,7 +124,7 @@ export const beneficios = {
       },
     },
     {
-      title: "Fortalecerás tu CV y perfil de LinkedIn",
+      title: "Fortalece tu CV y perfil de LinkedIn",
       body: "Aprenderás a comunicar mejor tu experiencia, habilidades y valor profesional.",
       image: {
         src: "/assets/beneficios/icon-4.webp",
@@ -132,7 +132,7 @@ export const beneficios = {
       },
     },
     {
-      title: "Usarás la IA y los datos como aliados",
+      title: "Usa la IA y los datos como aliados",
       body: "Desarrollarás habilidades digitales para potenciar tu búsqueda de empleo y fortalecer tu perfil profesional.",
       image: {
         src: "/assets/beneficios/icon-5.webp",
@@ -140,7 +140,7 @@ export const beneficios = {
       },
     },
     {
-      title: "Ampliarás tu red profesional",
+      title: "Amplía tu red profesional",
       body: "Conectarás con una comunidad de mujeres que podrá acompañarte, compartir experiencias e impulsar tu desarrollo.",
       image: {
         src: "/assets/beneficios/icon-6.webp",
@@ -242,7 +242,7 @@ export const requisitos = {
     "Tienes 18 años o más y resides en Bogotá.",
     "Cuentas con experiencia laboral previa.",
     "Quieres actualizar tus herramientas y habilidades para enfrentar mejor tu búsqueda.",
-    "Puedes dedicar aproximadamente 11,5 horas por semana durante las 10 semanas del programa.",
+    "Puedes dedicar aproximadamente 15 horas por semana durante las 10 semanas del programa.",
   ],
   cta: { label: "Postular", href: siteConfig.postularUrl },
   /**
@@ -273,8 +273,8 @@ export const logistica = {
       title: "Postulación e inicio del programa",
       icon: "plane" as const,
       items: [
-        "Las postulaciones estarán abiertas del X al X de X.",
-        "El programa iniciará el X de X de 2026.",
+        "Las postulaciones estarán abiertas del 27 de agosto al 11 de septiembre.",
+        "El programa iniciará el 21 de septiembre de 2026.",
       ],
     },
     {
@@ -282,15 +282,15 @@ export const logistica = {
       icon: "clock" as const,
       items: [
         "10 semanas.",
-        "3 sesiones en vivo por semana, equivalentes a 7,5 horas.",
-        "4 horas de trabajo individual.",
+        "4 sesiones en vivo por semana, equivalentes a 10 horas.",
+        "5 horas de trabajo individual.",
       ],
     },
     {
       title: "Horarios de sesiones en vivo",
       icon: "calendar" as const,
       items: [
-        "Las sesiones se realizarán los X, X y X, de X:00 a. m. a X:00 p. m.",
+        "Las sesiones se realizarán los martes, miércoles, jueves y viernes de 8:00 a.m. a 10:30 a.m.",
       ],
     },
   ],
@@ -323,8 +323,7 @@ export const closingCta = {
 } as const;
 
 /**
- * FAQ questions from Figma/prototype. Answers are interim (page facts)
- * and marked needsReview until client legal/marketing sign-off.
+ * FAQ copy signed off by the client (eligibility, dedication, dates, job-outcome).
  */
 export const faq = {
   id: "faq",
@@ -332,43 +331,23 @@ export const faq = {
   items: [
     {
       q: "¿Quiénes pueden postular?",
-      a: "Mujeres que actualmente buscan empleo, tienen 18 años o más, residen en Bogotá, cuentan con experiencia laboral previa y pueden dedicar aproximadamente 11,5 horas por semana durante las 10 semanas del programa.",
-      needsReview: true,
-    },
-    {
-      q: "¿Cómo será el proceso de selección?",
-      a: "Tras postular, el equipo revisará tu información y te contactará con los siguientes pasos. Los detalles finales del proceso serán confirmados al abrir la convocatoria.",
-      needsReview: true,
-    },
-    {
-      q: "¿Cuánto dura el programa?",
-      a: "El programa es gratuito y dura 10 semanas: 3 semanas de Activa tu carrera, 1 semana de pausa y 6 semanas de Data Fundamentals.",
-      needsReview: true,
+      a: "Mujeres pertenecientes a la red de Colsubsidio, que actualmente buscan empleo, tienen 18 años o más, residen en Bogotá, cuentan con experiencia laboral previa y pueden dedicar aproximadamente 15 horas por semana durante las 10 semanas del programa.",
+      needsReview: false,
     },
     {
       q: "¿Cuánto tiempo debo dedicar cada semana?",
-      a: "Aproximadamente 11,5 horas por semana: 7,5 horas en 3 sesiones en vivo y 4 horas de trabajo individual.",
-      needsReview: true,
-    },
-    {
-      q: "¿Necesito conocimientos previos en análisis de datos?",
-      a: "No. El módulo Data Fundamentals cubre los fundamentos del análisis de datos para fortalecer tu perfil, sin exigir experiencia previa en el área.",
-      needsReview: true,
-    },
-    {
-      q: "¿Tiene algún costo?",
-      a: "No. Es un programa gratuito de Colsubsidio y Laboratoria.",
-      needsReview: true,
+      a: "Aproximadamente 15 horas por semana: 10 horas en 4 sesiones en vivo, y 5 horas de trabajo individual.",
+      needsReview: false,
     },
     {
       q: "¿Cuándo inicia?",
-      a: "Las fechas de postulación e inicio se confirmarán próximamente (placeholders X en la sección de logística). El programa está planificado para 2026.",
-      needsReview: true,
+      a: "El programa inicia el 21 de septiembre y la convocatoria para postular estará abierta desde el 27 de agosto hasta el 11 de septiembre.",
+      needsReview: false,
     },
     {
-      q: "¿Qué pasa después de postular?",
-      a: "Recibirás información sobre el estado de tu postulación y los siguientes pasos del proceso. Mantén revisado tu correo para las comunicaciones del equipo.",
-      needsReview: true,
+      q: "¿Me garantizan que conseguiré trabajo?",
+      a: "El programa no es una bolsa de empleo, pero sí busca preparar a las participantes con las herramientas, la estrategia y la confianza para presentarse mejor a procesos de selección y aumentar sus posibilidades. Dentro del programa habrá espacios de conexión con empresas para promover oportunidades laborales.",
+      needsReview: false,
     },
   ] satisfies FaqItem[],
 } as const;
