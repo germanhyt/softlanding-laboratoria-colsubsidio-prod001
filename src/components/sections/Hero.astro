@@ -9,9 +9,9 @@ import MotionReveal from "@components/islands/MotionReveal";
   SoT desktop: info/prototype/1_desktop_hero-banner.png
   - Text block left, ~3-line H1, generous gaps H1 → body → CTA
   - Strong black left-to-right vignette (not a flat wash)
-  - Partner lockup: Colsubsidio taller than Laboratoria + "/"
+  - Partner lockup: top-right of the block, Laboratoria then Colsubsidio + "/"
   Mobile layout: full-bleed; Colsubsidio copy (ignore UTP stub in mobile PNG)
-  Motion: copy stagger from left (mount); partner lockup rises up
+  Motion: copy stagger from left (mount); partner lockup fades in
 -->
 <section
   id={hero.id}
@@ -48,8 +48,42 @@ import MotionReveal from "@components/islands/MotionReveal";
   </div>
 
   <div
-    class="container relative z-10 flex min-h-[100svh] flex-col justify-center pb-28 pt-24 md:min-h-[min(800px,calc(100vh-4.5rem))] md:pb-32 md:pt-16 lg:min-h-[min(860px,calc(100vh-4.5rem))] lg:pb-36 lg:pt-24"
+    class="container relative z-10 flex min-h-[100svh] flex-col pb-16 pt-[4.25rem] md:min-h-[min(800px,calc(100vh-4.5rem))] md:pb-20 md:pt-20 lg:min-h-[min(860px,calc(100vh-4.5rem))] lg:pb-24 lg:pt-[5.5rem] xl:pt-24"
   >
+    <!--
+      Lockup in document flow so it inherits container padding
+      (absolute right-0 sat on the padding edge and hugged the viewport).
+    -->
+    <MotionReveal
+      client:load
+      trigger="mount"
+      variant="fade"
+      delay={0.28}
+      className="pointer-events-none z-10 w-full shrink-0"
+    >
+      <div
+        aria-label="Aliados del programa"
+        class="hero-lockup flex items-center justify-end gap-2.5 sm:gap-3 md:gap-3.5 lg:gap-4"
+      >
+        <img
+          src={logos.laboWhite.src}
+          alt={logos.laboWhite.alt}
+          class="hero-lockup__labo pointer-events-auto h-auto w-24 object-contain object-right xs:w-28 sm:w-32 md:w-36 lg:w-40 xl:w-44"
+          loading="eager"
+        />
+        <span
+          class="hero-lockup__slash select-none text-lg font-light leading-none text-white sm:text-xl md:text-2xl lg:text-3xl"
+          aria-hidden="true">/</span
+        >
+        <img
+          src={logos.colsubsidio.src}
+          alt={logos.colsubsidio.alt}
+          class="hero-lockup__colsubsidio pointer-events-auto h-auto w-24 object-contain object-right xs:w-28 sm:w-32 md:w-36 lg:w-40 xl:w-44"
+          loading="eager"
+        />
+      </div>
+    </MotionReveal>
+
     <!--
       Bloque de texto: ancho para ~3 líneas de H1 en desktop,
       espacios verticales generosos como el prototype.
@@ -59,7 +93,7 @@ import MotionReveal from "@components/islands/MotionReveal";
       trigger="mount"
       variant="left"
       staggerDelay={0.08}
-      className="mb-[10rem] md:mb-[0rem]  max-w-[19.5rem] text-white xs:max-w-[22rem] sm:max-w-md md:max-w-[32rem] lg:max-w-[48rem] xl:max-w-[52rem]"
+      className="flex flex-1 flex-col justify-center max-w-[19.5rem] text-white xs:max-w-[22rem] sm:max-w-md md:max-w-[32rem] lg:max-w-[48rem] xl:max-w-[52rem]"
     >
       <h1
         id="hero-heading"
@@ -83,41 +117,6 @@ import MotionReveal from "@components/islands/MotionReveal";
         />
       </div>
     </MotionScope>
-
-    <!--
-      Lockup partners (prototype): Colsubsidio ~1.6–1.8× la altura de Laboratoria,
-      alineados al baseline, con "/" blanco.
-    -->
-    <MotionReveal
-      client:load
-      trigger="mount"
-      variant="up"
-      delay={0.28}
-      className="pointer-events-none absolute inset-x-0 bottom-0 z-10"
-    >
-      <div aria-label="Aliados del programa">
-        <div
-          class="container flex items-center gap-3.5 py-5 sm:gap-4 sm:py-6 md:gap-5 md:py-7 lg:py-8"
-        >
-          <img
-            src={logos.colsubsidio.src}
-            alt={logos.colsubsidio.alt}
-            class="pointer-events-auto h-auto w-28 object-contain object-left sm:w-32 md:w-36 lg:w-40 xl:w-44"
-            loading="eager"
-          />
-          <span
-            class="select-none text-xl font-light leading-none text-white/90 sm:text-2xl md:text-3xl"
-            aria-hidden="true">/</span
-          >
-          <img
-            src={logos.laboWhite.src}
-            alt={logos.laboWhite.alt}
-            class="pointer-events-auto h-auto w-28 object-contain object-left sm:w-32 md:w-36 lg:w-40 xl:w-44"
-            loading="eager"
-          />
-        </div>
-      </div>
-    </MotionReveal>
   </div>
 </section>
 
@@ -178,6 +177,32 @@ import MotionReveal from "@components/islands/MotionReveal";
       transform: scale(1.06);
       transform-origin: 88% 36%;
     }
+  }
+
+  /*
+    Lockup contrast on the photo (follows glyph alpha, not a plaque):
+    Laboratoria + slash → black halo; Colsubsidio → white contour.
+  */
+  .hero-lockup__labo {
+    filter:
+      drop-shadow(0 1px 1px rgb(0 0 0 / 0.92))
+      drop-shadow(0 0 6px rgb(0 0 0 / 0.72))
+      drop-shadow(0 4px 16px rgb(0 0 0 / 0.45));
+  }
+
+  .hero-lockup__slash {
+    text-shadow:
+      0 1px 1px rgb(0 0 0 / 0.95),
+      0 0 8px rgb(0 0 0 / 0.7),
+      0 3px 14px rgb(0 0 0 / 0.5);
+  }
+
+  .hero-lockup__colsubsidio {
+    filter:
+      drop-shadow(0 0 0.6px rgb(255 255 255 / 1))
+      drop-shadow(0 0 1.2px rgb(255 255 255 / 0.95))
+      drop-shadow(0 0 3px rgb(255 255 255 / 0.75))
+      drop-shadow(0 1px 8px rgb(255 255 255 / 0.4));
   }
 
   /* Mobile: top black band → fade into photo (1_mobile prototype) */
