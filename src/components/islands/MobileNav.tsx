@@ -1,4 +1,5 @@
 import { useEffect, useId, useState } from "react";
+import { isExternalHttpUrl } from "@utils/helpers";
 
 export type MobileNavLink = {
   label: string;
@@ -68,6 +69,7 @@ export default function MobileNav({
 
   const close = () => setOpen(false);
   const iconOnDark = !solidHeader && !open;
+  const postularExternal = isExternalHttpUrl(postularUrl);
 
   return (
     <div className="lg:hidden">
@@ -157,6 +159,8 @@ export default function MobileNav({
         <div className="border-t border-brand-dark/10 pt-5 pb-2">
           <a
             href={postularUrl}
+            target={postularExternal ? "_blank" : undefined}
+            rel={postularExternal ? "noopener noreferrer" : undefined}
             className="inline-flex w-full items-center justify-center rounded-full bg-brand-yellow px-6 py-3.5 text-base font-bold text-brand-neutral-black transition hover:bg-brand-yellow-soft shadow-md active:scale-[0.99]"
             onClick={close}
           >

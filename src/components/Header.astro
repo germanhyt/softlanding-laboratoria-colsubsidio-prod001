@@ -1,7 +1,10 @@
 ---
 import { siteConfig } from "@config/site.config";
+import { isExternalHttpUrl } from "@utils/helpers";
 import { logos, navLinks } from "@content/content";
 import MobileNav from "@components/islands/MobileNav";
+
+const postularExternal = isExternalHttpUrl(siteConfig.postularUrl);
 ---
 
 <!--
@@ -63,6 +66,8 @@ import MobileNav from "@components/islands/MobileNav";
       </a>
       <a
         href={siteConfig.postularUrl}
+        target={postularExternal ? "_blank" : undefined}
+        rel={postularExternal ? "noopener noreferrer" : undefined}
         class="inline-flex items-center rounded-full bg-brand-yellow px-5 py-2.5 text-sm font-bold text-brand-neutral-black transition hover:bg-brand-yellow-soft"
       >
         Postular

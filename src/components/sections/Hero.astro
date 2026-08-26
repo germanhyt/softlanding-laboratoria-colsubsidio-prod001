@@ -1,5 +1,6 @@
 ---
 import { hero, logos } from "@content/content";
+import { siteConfig } from "@config/site.config";
 import PostularCta from "@components/islands/PostularCta";
 import MotionScope from "@components/islands/MotionScope";
 import MotionReveal from "@components/islands/MotionReveal";
@@ -111,7 +112,7 @@ import MotionReveal from "@components/islands/MotionReveal";
       <div data-motion-item>
         <PostularCta
           client:idle
-          href={hero.cta.href}
+          href={siteConfig.postularUrl}
           label={hero.cta.label}
           className="mt-8 inline-flex items-center rounded-full bg-brand-yellow px-9 py-3 text-[0.95rem] font-bold text-brand-neutral-black transition hover:bg-brand-yellow-soft sm:mt-9 sm:px-10 sm:py-3.5 sm:text-base md:mt-10"
         />
@@ -181,28 +182,18 @@ import MotionReveal from "@components/islands/MotionReveal";
 
   /*
     Lockup contrast on the photo (follows glyph alpha, not a plaque):
-    Laboratoria + slash → black halo; Colsubsidio → white contour.
+    Laboratoria + slash → light black halo. Colsubsidio has no drop-shadow.
   */
   .hero-lockup__labo {
     filter:
-      drop-shadow(0 1px 1px rgb(0 0 0 / 0.92))
-      drop-shadow(0 0 6px rgb(0 0 0 / 0.72))
-      drop-shadow(0 4px 16px rgb(0 0 0 / 0.45));
+      drop-shadow(0 1px 1px rgb(0 0 0 / 0.4))
+      drop-shadow(0 0 2px rgb(0 0 0 / 0.22));
   }
 
   .hero-lockup__slash {
     text-shadow:
-      0 1px 1px rgb(0 0 0 / 0.95),
-      0 0 8px rgb(0 0 0 / 0.7),
-      0 3px 14px rgb(0 0 0 / 0.5);
-  }
-
-  .hero-lockup__colsubsidio {
-    filter:
-      drop-shadow(0 0 0.6px rgb(255 255 255 / 1))
-      drop-shadow(0 0 1.2px rgb(255 255 255 / 0.95))
-      drop-shadow(0 0 3px rgb(255 255 255 / 0.75))
-      drop-shadow(0 1px 8px rgb(255 255 255 / 0.4));
+      0 1px 1px rgb(0 0 0 / 0.35),
+      0 0 3px rgb(0 0 0 / 0.2);
   }
 
   /* Mobile: top black band → fade into photo (1_mobile prototype) */

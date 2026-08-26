@@ -1,6 +1,10 @@
 ---
 import { closingCta } from "@content/content";
+import { siteConfig } from "@config/site.config";
+import { isExternalHttpUrl } from "@utils/helpers";
 import MotionReveal from "@components/islands/MotionReveal";
+
+const postularExternal = isExternalHttpUrl(siteConfig.postularUrl);
 ---
 
 <section
@@ -26,7 +30,9 @@ import MotionReveal from "@components/islands/MotionReveal";
         {closingCta.body}
       </p>
       <a
-        href={closingCta.cta.href}
+        href={siteConfig.postularUrl}
+        target={postularExternal ? "_blank" : undefined}
+        rel={postularExternal ? "noopener noreferrer" : undefined}
         class="mt-8 inline-flex items-center rounded-full bg-brand-neutral-black px-8 py-3 text-base font-semibold text-brand-neutral-white transition hover:bg-brand-dark-muted"
       >
         {closingCta.cta.label}

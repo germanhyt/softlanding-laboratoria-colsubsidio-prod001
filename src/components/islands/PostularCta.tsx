@@ -1,17 +1,21 @@
 import { motion, useReducedMotion } from "framer-motion";
 import type { MouseEvent } from "react";
-import { isPostularPlaceholder } from "@utils/helpers";
+import {
+  isExternalHttpUrl,
+  isPostularPlaceholder,
+  postularHref,
+} from "@utils/helpers";
 import { springSoft } from "../../lib/motion";
 
 type Props = {
-  href: string;
+  href?: string;
   label?: string;
   className?: string;
 };
 
 /**
- * Shared Postular CTA island. Navigates to `href` from site config.
- * SweetAlert2 is reserved for a future empty-URL gate; `#postular` is a valid placeholder target.
+ * Shared Postular CTA island. Always resolves to the Laboratoria apply URL
+ * from site config unless a non-empty href is passed.
  */
 export default function PostularCta({
   href,
@@ -19,10 +23,11 @@ export default function PostularCta({
   className,
 }: Props) {
   const reduceMotion = useReducedMotion();
+  const resolvedHref = href?.trim() || postularHref();
+  const external = isExternalHttpUrl(resolvedHref);
 
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
-    // Only intercept truly empty targets; `#postular` scrolls to the closing band.
-    if (href.trim() === "") {
+    if (resolvedHref.trim() === "") {
       event.preventDefault();
       void import("sweetalert2").then((mod) =>
         mod.default.fire({
@@ -35,15 +40,16 @@ export default function PostularCta({
       return;
     }
 
-    // Keep default navigation for `#postular` and absolute URLs.
-    if (isPostularPlaceholder(href)) return;
+    if (isPostularPlaceholder(resolvedHref)) return;
   };
 
   return (
     <motion.a
-      href={href || "#postular"}
+      href={resolvedHref}
       className={className}
       onClick={handleClick}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
       whileHover={reduceMotion ? undefined : { scale: 1.03, y: -1 }}
       whileTap={reduceMotion ? undefined : { scale: 0.98 }}
       transition={springSoft}
