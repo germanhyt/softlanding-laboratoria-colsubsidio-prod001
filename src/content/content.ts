@@ -274,7 +274,7 @@ export const logistica = {
       icon: "plane" as const,
       items: [
         "Las postulaciones estarán abiertas del 27 de agosto al 11 de septiembre.",
-        "El programa iniciará el 21 de septiembre de 2026.",
+        "El programa iniciará el 29 de septiembre de 2026.",
       ],
     },
     {
@@ -361,7 +361,7 @@ export const faq = {
     },
     {
       q: "¿Cuándo inicia?",
-      a: "El programa inicia el 21 de septiembre y la convocatoria para postular estará abierta desde el 27 de agosto hasta el 11 de septiembre.",
+      a: "El programa inicia el 29 de septiembre y la convocatoria para postular estará abierta desde el 27 de agosto hasta el 11 de septiembre.",
       needsReview: false,
     },
     {
