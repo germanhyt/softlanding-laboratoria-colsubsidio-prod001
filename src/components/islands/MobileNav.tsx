@@ -1,5 +1,4 @@
 import { useEffect, useId, useState } from "react";
-import { isExternalHttpUrl } from "@utils/helpers";
 
 export type MobileNavLink = {
   label: string;
@@ -9,7 +8,6 @@ export type MobileNavLink = {
 type Props = {
   links: MobileNavLink[];
   conocenosUrl: string;
-  postularUrl: string;
   logoSrc?: string;
   logoAlt?: string;
 };
@@ -17,7 +15,6 @@ type Props = {
 export default function MobileNav({
   links,
   conocenosUrl,
-  postularUrl,
 }: Props) {
   const panelId = useId();
   const [open, setOpen] = useState(false);
@@ -69,7 +66,6 @@ export default function MobileNav({
 
   const close = () => setOpen(false);
   const iconOnDark = !solidHeader && !open;
-  const postularExternal = isExternalHttpUrl(postularUrl);
 
   return (
     <div className="lg:hidden">
@@ -126,7 +122,7 @@ export default function MobileNav({
       <nav
         id={panelId}
         aria-label="Menú móvil"
-        className={`mobile-nav-clippy fixed inset-x-0 top-14 sm:top-16 bottom-0 z-40 flex flex-col justify-between border-t border-brand-dark/10 bg-brand-neutral-white px-6 py-6 shadow-2xl ${
+        className={`mobile-nav-clippy fixed inset-x-0 top-14 sm:top-16 bottom-0 z-40 flex flex-col border-t border-brand-dark/10 bg-brand-neutral-white px-6 py-6 shadow-2xl ${
           open ? "is-open" : ""
         }`}
         {...(!open ? { inert: true as const } : {})}
@@ -155,18 +151,6 @@ export default function MobileNav({
             </a>
           </li>
         </ul>
-
-        <div className="border-t border-brand-dark/10 pt-5 pb-2">
-          <a
-            href={postularUrl}
-            target={postularExternal ? "_blank" : undefined}
-            rel={postularExternal ? "noopener noreferrer" : undefined}
-            className="inline-flex w-full items-center justify-center rounded-full bg-brand-yellow px-6 py-3.5 text-base font-bold text-brand-neutral-black transition hover:bg-brand-yellow-soft shadow-md active:scale-[0.99]"
-            onClick={close}
-          >
-            Postular
-          </a>
-        </div>
       </nav>
     </div>
   );

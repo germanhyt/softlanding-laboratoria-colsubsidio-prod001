@@ -1,6 +1,5 @@
 ---
 import { requisitos } from "@content/content";
-import { siteConfig } from "@config/site.config";
 import PostularCta from "@components/islands/PostularCta";
 import MotionReveal from "@components/islands/MotionReveal";
 import MotionScope from "@components/islands/MotionScope";
@@ -66,7 +65,6 @@ import MotionScope from "@components/islands/MotionScope";
       <MotionReveal client:load variant="up" delay={0.08} className="mt-8 flex justify-center md:justify-start">
         <PostularCta
           client:idle
-          href={siteConfig.postularUrl}
           label={requisitos.cta.label}
           className="inline-flex items-center rounded-full bg-brand-yellow px-9 py-3 text-base font-bold text-brand-neutral-black transition hover:bg-brand-yellow-soft"
         />

@@ -1,6 +1,5 @@
 ---
 import { hero, logos } from "@content/content";
-import { siteConfig } from "@config/site.config";
 import PostularCta from "@components/islands/PostularCta";
 import MotionScope from "@components/islands/MotionScope";
 import MotionReveal from "@components/islands/MotionReveal";
@@ -112,7 +111,6 @@ import MotionReveal from "@components/islands/MotionReveal";
       <div data-motion-item>
         <PostularCta
           client:idle
-          href={siteConfig.postularUrl}
           label={hero.cta.label}
           className="mt-8 inline-flex items-center rounded-full bg-brand-yellow px-9 py-3 text-[0.95rem] font-bold text-brand-neutral-black transition hover:bg-brand-yellow-soft sm:mt-9 sm:px-10 sm:py-3.5 sm:text-base md:mt-10"
         />

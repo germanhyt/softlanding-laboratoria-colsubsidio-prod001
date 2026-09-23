@@ -1,14 +1,11 @@
 ---
 import { siteConfig } from "@config/site.config";
-import { isExternalHttpUrl } from "@utils/helpers";
 import { logos, navLinks } from "@content/content";
 import MobileNav from "@components/islands/MobileNav";
-
-const postularExternal = isExternalHttpUrl(siteConfig.postularUrl);
 ---
 
 <!--
-  Desktop (prototype 1_desktop): white bar, black logo, dark links, yellow Postular.
+  Desktop (prototype 1_desktop): white bar, black logo, dark links.
   Mobile (prototype 1_mobile): transparent over hero, white logo + white hamburger;
   solid white + black branding after scroll for readability on light sections.
 -->
@@ -64,21 +61,12 @@ const postularExternal = isExternalHttpUrl(siteConfig.postularUrl);
       >
         Conócenos
       </a>
-      <a
-        href={siteConfig.postularUrl}
-        target={postularExternal ? "_blank" : undefined}
-        rel={postularExternal ? "noopener noreferrer" : undefined}
-        class="inline-flex items-center rounded-full bg-brand-yellow px-5 py-2.5 text-sm font-bold text-brand-neutral-black transition hover:bg-brand-yellow-soft"
-      >
-        Postular
-      </a>
     </nav>
 
     <MobileNav
       client:load
       links={[...navLinks]}
       conocenosUrl={siteConfig.conocenosUrl}
-      postularUrl={siteConfig.postularUrl}
       logoSrc={logos.laboBlack.src}
       logoAlt={logos.laboBlack.alt}
     />
