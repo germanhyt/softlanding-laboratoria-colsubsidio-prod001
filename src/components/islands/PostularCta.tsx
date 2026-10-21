@@ -1,27 +1,60 @@
+import { motion, useReducedMotion } from "framer-motion";
+import type { MouseEvent } from "react";
+import {
+  isExternalHttpUrl,
+  isPostularPlaceholder,
+  postularHref,
+} from "@utils/helpers";
+import { springSoft } from "../../lib/motion";
+
 type Props = {
-  /** Kept for existing call sites; navigation is closed. */
   href?: string;
   label?: string;
   className?: string;
 };
 
 /**
- * Closed-call CTA. Renders as a non-interactive button so it never redirects.
+ * Shared apply CTA. Resolves to the Laboratoria apply URL from site config
+ * unless a non-empty href is passed.
  */
 export default function PostularCta({
-  label = "Convocatoria cerrada",
+  href,
+  label = "Postula",
   className,
 }: Props) {
+  const reduceMotion = useReducedMotion();
+  const resolvedHref = href?.trim() || postularHref();
+  const external = isExternalHttpUrl(resolvedHref);
+
+  const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (resolvedHref.trim() === "") {
+      event.preventDefault();
+      void import("sweetalert2").then((mod) =>
+        mod.default.fire({
+          title: "Próximamente",
+          text: "La postulación estará disponible en breve.",
+          confirmButtonText: "Entendido",
+          confirmButtonColor: "#FFE521",
+        }),
+      );
+      return;
+    }
+
+    if (isPostularPlaceholder(resolvedHref)) return;
+  };
+
   return (
-    <button
-      type="button"
-      disabled
-      aria-disabled="true"
-      className={[className, "pointer-events-none cursor-not-allowed opacity-90"]
-        .filter(Boolean)
-        .join(" ")}
+    <motion.a
+      href={resolvedHref}
+      className={className}
+      onClick={handleClick}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
+      whileHover={reduceMotion ? undefined : { scale: 1.03, y: -1 }}
+      whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+      transition={springSoft}
     >
       {label}
-    </button>
+    </motion.a>
   );
 }

@@ -35,7 +35,7 @@ export const hero = {
     "Prepárate para volver al mercado laboral con más confianza y nuevas herramientas.",
   subcopy:
     "Colsubsidio y Laboratoria presentan un programa gratuito de 10 semanas para fortalecer tu perfil, desarrollar habilidades digitales y construir una estrategia clara para tu búsqueda de empleo.",
-  cta: { label: "Convocatoria cerrada", href: siteConfig.postularUrl },
+  cta: { label: "Postula", href: siteConfig.postularUrl },
   image: {
     src: "/assets/hero/hero.webp",
     alt: "Dos mujeres profesionales colaborando en un entorno de oficina moderno",
@@ -157,7 +157,7 @@ export const experiencia = {
   introAccent:
     "combinan preparación para la búsqueda de empleo y formación en habilidades digitales.",
   footnote: "*Tendrás una semana de pausa entre ambos módulos.",
-  cta: { label: "Convocatoria cerrada", href: siteConfig.postularUrl },
+  cta: { label: "Postula", href: siteConfig.postularUrl },
   /**
    * Precomposed art for §5 (white/magenta geometry + character + icons).
    * Source: info/img/Ilustración sección 5/Group 1000004521.png
@@ -244,7 +244,7 @@ export const requisitos = {
     "Quieres actualizar tus herramientas y habilidades para enfrentar mejor tu búsqueda.",
     "Puedes dedicar aproximadamente 15 horas por semana durante las 10 semanas del programa.",
   ],
-  cta: { label: "Convocatoria cerrada", href: siteConfig.postularUrl },
+  cta: { label: "Postula", href: siteConfig.postularUrl },
   /**
    * Precomposed portrait (magenta + yellow diagonal + subject).
    * Source: info/img/Imagen sección 7 (2)/Group 1000004522.png
@@ -273,8 +273,8 @@ export const logistica = {
       title: "Postulación e inicio del programa",
       icon: "plane" as const,
       items: [
-        "Las postulaciones estarán abiertas del 27 de agosto al 11 de septiembre.",
-        "El programa iniciará el 21 de septiembre de 2026.",
+        "Las postulaciones estarán abiertas del 26 de octubre al 11 de noviembre.",
+        "El programa iniciará el 17 de noviembre de 2026.",
       ],
     },
     {
@@ -319,7 +319,7 @@ export const closingCta = {
   id: "postular",
   headline: "Empieza hoy el camino hacia tu próximo empleo",
   body: "Si estás lista para fortalecer tu confianza, desarrollar nuevas habilidades y prepararte para acceder a mejores oportunidades laborales. ¡Postula hoy!",
-  cta: { label: "Convocatoria cerrada", href: siteConfig.postularUrl },
+  cta: { label: "Postula", href: siteConfig.postularUrl },
 } as const;
 
 /**
@@ -361,7 +361,7 @@ export const faq = {
     },
     {
       q: "¿Cuándo inicia?",
-      a: "El programa inicia el 21 de septiembre y la convocatoria para postular estará abierta desde el 27 de agosto hasta el 11 de septiembre.",
+      a: "El programa inicia el 17 de noviembre y la convocatoria para postular estará abierta desde el 26 de octubre hasta el 11 de noviembre.",
       needsReview: false,
     },
     {
