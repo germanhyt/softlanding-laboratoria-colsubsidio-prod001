@@ -5,8 +5,7 @@
 export const siteConfig = {
   siteUrl: "https://example.com", // TBD — production URL pending
   lang: "es",
-  postularUrl:
-    "https://app.laboratoria.la/apply?step=0&code=ADM-COLSUBSIDIO-21-SEP-2026",
+  postularUrl: "", // TBD — apply form URL pending
   conocenosUrl: "https://laboratoria.la",
 } as const;
 
