@@ -156,7 +156,7 @@ export const experiencia = {
   introBefore: "El programa está dividido en dos módulos que ",
   introAccent:
     "combinan preparación para la búsqueda de empleo y formación en habilidades digitales.",
-  footnote: "*Tendrás una semana de pausa entre ambos módulos.",
+  footnote: "*Tendrás un tiempo de pausa entre ambos módulos.",
   cta: { label: "Postula", href: siteConfig.postularUrl },
   /**
    * Precomposed art for §5 (white/magenta geometry + character + icons).
