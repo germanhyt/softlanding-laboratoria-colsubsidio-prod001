@@ -95,7 +95,7 @@ export const beneficios = {
   headlineBefore: "Fortalece tu perfil y ",
   headlineAccent: "prepárate para volver al mercado laboral",
   introBefore: "No es solo teoría. ",
-  introAccent: "Durante 10 semanas trabajarás con herramientas prácticas",
+  introAccent: "En corto tiempo trabajarás con herramientas prácticas",
   introAfter:
     " para mejorar tu búsqueda de empleo, actualizar tus habilidades digitales y prepararte mejor para los procesos de selección.",
   cards: [
@@ -152,7 +152,7 @@ export const beneficios = {
 
 export const experiencia = {
   id: "experiencia",
-  headline: "Así será tu experiencia durante las 10 semanas",
+  headline: "Así será tu experiencia",
   introBefore: "El programa está dividido en dos módulos que ",
   introAccent:
     "combinan preparación para la búsqueda de empleo y formación en habilidades digitales.",
@@ -242,7 +242,7 @@ export const requisitos = {
     "Tienes 18 años o más y resides en Bogotá.",
     "Cuentas con experiencia laboral previa.",
     "Quieres actualizar tus herramientas y habilidades para enfrentar mejor tu búsqueda.",
-    "Puedes dedicar aproximadamente 15 horas por semana durante las 10 semanas del programa.",
+    "Puedes dedicar aproximadamente 15 horas por semana, durante las semanas que dure cada módulo.",
   ],
   cta: { label: "Postula", href: siteConfig.postularUrl },
   /**
@@ -281,7 +281,7 @@ export const logistica = {
       title: "Duración y sesiones del programa",
       icon: "clock" as const,
       items: [
-        "10 semanas.",
+        "3 semanas del módulo 1 + 6 semanas del módulo 2.",
         "4 sesiones en vivo por semana, equivalentes a 10 horas.",
         "5 horas de trabajo individual.",
       ],
@@ -331,7 +331,7 @@ export const faq = {
   items: [
     {
       q: "¿Quiénes pueden postular?",
-      a: "Mujeres pertenecientes a la red de Colsubsidio, que actualmente buscan empleo, tienen 18 años o más, residen en Bogotá, cuentan con experiencia laboral previa y pueden dedicar aproximadamente 15 horas por semana durante las 10 semanas del programa.",
+      a: "Mujeres cesantes que actualmente buscan empleo, tienen 18 años o más, residen en Bogotá, cuentan con experiencia laboral previa y pueden dedicar aproximadamente 15 horas por semana durante las semanas que dure cada módulo del programa.",
       needsReview: false,
     },
     {
@@ -341,7 +341,7 @@ export const faq = {
     },
     {
       q: "¿Cuánto dura el programa?",
-      a: "El programa dura 10 semanas y contempla 115 horas de formación, distribuidas en dos módulos: Activa tu Carrera y Data Fundamentals.",
+      a: "El programa dura 9 semanas y contempla 115 horas de formación, distribuidas en dos módulos: Activa tu Carrera y Data Fundamentals.",
       needsReview: false,
     },
     {
