@@ -29,7 +29,7 @@ export default function ClosedApplicationsBanner({
   bodyAccent,
   bodyAfter,
 }: Props) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const reduce = useReducedMotion();
   const titleId = useId();
   const descId = useId();
