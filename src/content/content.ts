@@ -378,8 +378,11 @@ export const faq = {
 } as const;
 
 export const closedApplications = {
-  title: "Gracias por tu interés",
-  body: "Las postulaciones para esta convocatoria ya finalizaron.",
+  headlineBefore: "Gracias por tu interés,",
+  headlineAccent: "convocatorias cerradas",
+  bodyBefore: "Las postulaciones para esta convocatoria ",
+  bodyAccent: "ya finalizaron",
+  bodyAfter: ".",
 } as const;
 
 export const footer = {

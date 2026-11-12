@@ -50,8 +50,11 @@ const { title = seoConfig.title, description = seoConfig.description } =
       !siteConfig.applicationsOpen && (
         <ClosedApplicationsBanner
           client:load
-          title={closedApplications.title}
-          body={closedApplications.body}
+          headlineBefore={closedApplications.headlineBefore}
+          headlineAccent={closedApplications.headlineAccent}
+          bodyBefore={closedApplications.bodyBefore}
+          bodyAccent={closedApplications.bodyAccent}
+          bodyAfter={closedApplications.bodyAfter}
           brand={logos.laboBlack.alt}
           partner={logos.colsubsidio.alt}
           logoSrc={logos.laboBlack.src}

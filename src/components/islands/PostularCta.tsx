@@ -1,6 +1,7 @@
 import { siteConfig } from "@config/site.config";
 import { motion, useReducedMotion } from "framer-motion";
 import type { MouseEvent } from "react";
+import { openClosedApplications } from "../../lib/closedApplications";
 import {
   isExternalHttpUrl,
   isPostularPlaceholder,
@@ -28,15 +29,16 @@ export default function PostularCta({
 
   if (!applicationsOpen) {
     return (
-      <button
+      <motion.button
         type="button"
-        disabled
-        aria-disabled="true"
-        title="La convocatoria está cerrada"
-        className={`${className ?? ""} cursor-not-allowed opacity-50`}
+        className={className}
+        onClick={openClosedApplications}
+        whileHover={reduceMotion ? undefined : { scale: 1.03, y: -1 }}
+        whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+        transition={springSoft}
       >
         {label}
-      </button>
+      </motion.button>
     );
   }
 

@@ -1,5 +1,6 @@
 import { useEffect, useId, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { OPEN_CLOSED_APPLICATIONS } from "../../lib/closedApplications";
 import { easeOutExpo } from "../../lib/motion";
 
 type Props = {
@@ -7,11 +8,13 @@ type Props = {
   partner: string;
   logoSrc: string;
   partnerLogoSrc: string;
-  title: string;
-  body: string;
+  headlineBefore: string;
+  headlineAccent: string;
+  bodyBefore: string;
+  bodyAccent: string;
+  bodyAfter: string;
 };
 
-const STORAGE_KEY = "colsubsidio-closed-applications-banner";
 const clipClosed = "inset(0 0 100% 0 round 20px)";
 const clipOpen = "inset(0 0 0% 0 round 20px)";
 
@@ -20,8 +23,11 @@ export default function ClosedApplicationsBanner({
   partner,
   logoSrc,
   partnerLogoSrc,
-  title,
-  body,
+  headlineBefore,
+  headlineAccent,
+  bodyBefore,
+  bodyAccent,
+  bodyAfter,
 }: Props) {
   const [open, setOpen] = useState(false);
   const reduce = useReducedMotion();
@@ -29,12 +35,9 @@ export default function ClosedApplicationsBanner({
   const descId = useId();
 
   useEffect(() => {
-    try {
-      if (sessionStorage.getItem(STORAGE_KEY) === "1") return;
-    } catch {
-      /* private mode */
-    }
-    setOpen(true);
+    const onOpen = () => setOpen(true);
+    window.addEventListener(OPEN_CLOSED_APPLICATIONS, onOpen);
+    return () => window.removeEventListener(OPEN_CLOSED_APPLICATIONS, onOpen);
   }, []);
 
   useEffect(() => {
@@ -42,7 +45,7 @@ export default function ClosedApplicationsBanner({
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") close();
+      if (event.key === "Escape") setOpen(false);
     };
     window.addEventListener("keydown", onKey);
     return () => {
@@ -50,15 +53,6 @@ export default function ClosedApplicationsBanner({
       window.removeEventListener("keydown", onKey);
     };
   }, [open]);
-
-  const close = () => {
-    try {
-      sessionStorage.setItem(STORAGE_KEY, "1");
-    } catch {
-      /* private mode */
-    }
-    setOpen(false);
-  };
 
   return (
     <AnimatePresence>
@@ -74,7 +68,7 @@ export default function ClosedApplicationsBanner({
             type="button"
             className="absolute inset-0 bg-brand-dark/45 backdrop-blur-[2px]"
             aria-label="Cerrar aviso"
-            onClick={close}
+            onClick={() => setOpen(false)}
           />
 
           <motion.div
@@ -86,18 +80,13 @@ export default function ClosedApplicationsBanner({
             animate={reduce ? { opacity: 1 } : { clipPath: clipOpen, opacity: 1 }}
             exit={reduce ? { opacity: 0 } : { clipPath: clipClosed, opacity: 1 }}
             transition={{ duration: reduce ? 0.18 : 0.48, ease: easeOutExpo }}
-            className="relative z-10 w-full max-w-[560px] overflow-hidden rounded-[20px] bg-brand-yellow px-5 py-7 shadow-[0_16px_40px_rgba(15,25,31,0.18)] sm:px-8 sm:py-9 md:px-10"
+            className="relative z-10 w-full max-w-[640px] overflow-hidden rounded-[1.25rem] bg-brand-neutral-white px-6 py-8 shadow-[0_16px_40px_rgba(15,25,31,0.18)] sm:px-8 sm:py-10 md:px-10"
           >
-            <span
-              className="absolute left-0 top-0 h-1.5 w-full bg-brand-magenta-bright"
-              aria-hidden="true"
-            />
-
             <button
               type="button"
-              className="absolute right-3 top-3 inline-flex h-11 w-11 items-center justify-center rounded-full text-brand-neutral-black transition-opacity hover:opacity-70"
+              className="absolute right-3 top-3 inline-flex h-11 w-11 items-center justify-center rounded-full text-brand-dark transition-opacity hover:opacity-70"
               aria-label="Cerrar aviso"
-              onClick={close}
+              onClick={() => setOpen(false)}
             >
               <svg
                 width="26"
@@ -115,28 +104,24 @@ export default function ClosedApplicationsBanner({
               </svg>
             </button>
 
-            <div className="flex gap-[13px]">
-              <span
-                className="mt-1 w-1 shrink-0 self-stretch rounded-full bg-brand-magenta-bright"
-                aria-hidden="true"
-              />
-              <div>
-                <h2
-                  id={titleId}
-                  className="text-[26px] font-semibold leading-[1.18] text-brand-neutral-black sm:text-[32px]"
-                >
-                  {title}
-                </h2>
-                <p
-                  id={descId}
-                  className="mt-3 max-w-[420px] text-base leading-relaxed text-brand-dark sm:text-lg"
-                >
-                  {body}
-                </p>
-              </div>
-            </div>
+            <h2
+              id={titleId}
+              className="pr-10 text-[1.65rem] font-bold leading-[1.15] tracking-tight text-brand-dark sm:text-[2.1rem]"
+            >
+              <span className="block">{headlineBefore}</span>
+              <span className="block text-brand-magenta">{headlineAccent}</span>
+            </h2>
 
-            <div className="mt-7 flex items-center justify-end gap-2 sm:gap-2.5">
+            <p
+              id={descId}
+              className="mt-6 border-l-2 border-brand-magenta pl-4 text-[0.9375rem] leading-[1.55] text-brand-dark sm:pl-5 sm:text-base md:text-lg md:leading-[1.55]"
+            >
+              {bodyBefore}
+              <strong className="font-bold">{bodyAccent}</strong>
+              {bodyAfter}
+            </p>
+
+            <div className="mt-8 flex items-center justify-end gap-2 sm:gap-2.5">
               <img
                 src={logoSrc}
                 alt={`Logo ${brand}`}
