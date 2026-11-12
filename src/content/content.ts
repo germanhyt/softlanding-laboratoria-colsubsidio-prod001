@@ -377,6 +377,11 @@ export const faq = {
   ] satisfies FaqItem[],
 } as const;
 
+export const closedApplications = {
+  title: "Gracias por tu interés",
+  body: "Las postulaciones para esta convocatoria ya finalizaron.",
+} as const;
+
 export const footer = {
   homeHref: "#inicio",
   conocenos: { label: "Conócenos", href: siteConfig.conocenosUrl },

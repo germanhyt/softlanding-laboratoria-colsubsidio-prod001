@@ -1,3 +1,4 @@
+import { siteConfig } from "@config/site.config";
 import { motion, useReducedMotion } from "framer-motion";
 import type { MouseEvent } from "react";
 import {
@@ -23,6 +24,22 @@ export default function PostularCta({
   className,
 }: Props) {
   const reduceMotion = useReducedMotion();
+  const applicationsOpen: boolean = siteConfig.applicationsOpen;
+
+  if (!applicationsOpen) {
+    return (
+      <button
+        type="button"
+        disabled
+        aria-disabled="true"
+        title="La convocatoria está cerrada"
+        className={`${className ?? ""} cursor-not-allowed opacity-50`}
+      >
+        {label}
+      </button>
+    );
+  }
+
   const resolvedHref = href?.trim() || postularHref();
   const external = isExternalHttpUrl(resolvedHref);
 

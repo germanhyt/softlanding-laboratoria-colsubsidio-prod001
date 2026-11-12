@@ -3,6 +3,8 @@ import { seoConfig } from "@config/seoConfig";
 import { siteConfig } from "@config/site.config";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
+import ClosedApplicationsBanner from "@components/islands/ClosedApplicationsBanner";
+import { closedApplications, logos } from "@content/content";
 import "../styles/global.css";
 
 interface Props {
@@ -44,6 +46,19 @@ const { title = seoConfig.title, description = seoConfig.description } =
     <link rel="apple-touch-icon" href="/favicon.png" />
   </head>
   <body class="flex min-h-screen flex-col">
+    {
+      !siteConfig.applicationsOpen && (
+        <ClosedApplicationsBanner
+          client:load
+          title={closedApplications.title}
+          body={closedApplications.body}
+          brand={logos.laboBlack.alt}
+          partner={logos.colsubsidio.alt}
+          logoSrc={logos.laboBlack.src}
+          partnerLogoSrc={logos.colsubsidio.src}
+        />
+      )
+    }
     <Header />
     <main class="flex-1">
       <slot />
